@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_action_title_drink">tomar</string>
+    <string name="menu_action_title_hardcore">hardcore</string>
+
+    <string name="menu_action_drink_on">Cartas para tomar habiltadas</string>
+    <string name="menu_action_drink_off">Cartas para tomar deshabiltadas</string>
+    <string name="menu_action_hardcore_on">Cartas hardcore habilitadas</string>
+    <string name="menu_action_hardcore_off">Cartas hardcore deshabilitadas</string>
+</resources>

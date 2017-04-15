@@ -1,0 +1,999 @@
+-
+  title: 'Apresurado'
+  description: 'Bebe 3 tragos y roba otra carta'
+  quote: 'Movidito'
+  quantity: 3
+  timer: 
+  tags:
+    - drink
+  dices:
+-
+  title: 'El adicto'
+  description: 'Debes tomar un trago de cada vaso en la mesa'
+  quote: 'Este sujeto tiene un problema'
+  quantity: 1
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Cervecita querida'
+  description: 'El que no esta tomando cerveza pierde'
+  quote: 'Para el enzito'
+  quantity: 1
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Pacto de hermanos'
+  description: 'Elige un jugador, el y tu deberan beber por 5 segundos'
+  quote: 'La fuerza de un guerrero depende del tamaño de su corazon'
+  quantity: 2
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Heroe'
+  description: 'Haz un fondo blanco'
+  quote: ''
+  quantity: 2
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Tatuuu'
+  description: 'Los que no tengan tatuajes beben'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Repartija'
+  description: 'Reparte 3 tragos'
+  quote: ''
+  quantity: 3
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Repartija'
+  description: 'Reparte 6 tragos'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'Cascada'
+  description: 'Todos los jugadores deben beber, solo el jugador actual puede detenerse cuando quiera y el resto solo puede detenerse cuando lo haga el de su derecha'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - drink
+  dices:
+-
+  title: 'La complicada'
+  description: 'No se puede ingerir bebidas con la derecha'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - drink
+    - discord
+  dices:
+-
+  title: 'Zurdito'
+  description: 'No se puede ingerir bebidas con la izquierda'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - drink
+    - discord
+  dices:
+-
+  title: 'Banana'
+  description: 'Agarra una banana (la fruta si) y aplicale sexo oral'
+  quote: 'Somos basicos'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Casablanca'
+  description: 'Besa al jugador de enfrente'
+  quote: 'Como en diario de una pasion, por favor'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Repartiendo amor'
+  description: 'Dale un pico a todos los jugadores'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Ombligo'
+  description: 'Debes beber algun liquido del ombligo de un jugador elegido por el jugador a tu derecha'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Miley Cyrus'
+  description: 'Debes hacer twerking con el participante que elija el jugador de la derecha'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Hielito'
+  description: 'Debes pasarle un hielo con la boca al jugador de la izquierda'
+  quote: 'Por que Giuli crearia una carta asi?'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Rapidito'
+  description: 'Debes permanecer en el baño con el jugador a tu izquierda por 5 minutos'
+  quote: 'Que sucedera, no?'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'La cama'
+  description: 'Debes quitarte una prenda'
+  quote: 'El prisionero quiere decir una palabra: ¡LIBERTAAAAAAAAAAAAAD!'
+  quantity: 3
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Paja'
+  description: 'Di en voz alta el máximo de veces que te hayas masturbado en un día, si es más de 4 ganas'
+  quote: 'Un titan el tipo'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Ininputable'
+  description: 'Di en voz alta hace cuanto no tenes sexo, si hace mas de un mes que no tenes, todos pierden, sino perdes vos'
+  quote: 'Nadie te va a juzgar'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Verano'
+  description: 'El jugador que tenga mas ropa encima debe quitarse una prenda'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Stripper'
+  description: 'El jugador que tenga menos ropa debe quitarse una prenda'
+  quote: ''
+  quantity: 2
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'La segunda'
+  description: 'Elige dos jugadores, deben besarse apasionadamente'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Montaña'
+  description: 'Elige dos jugadores, uno debe continuar la partida encima del otro hasta que termine la partida, si quedan solo ellos 2 ganan'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Tengo el poder'
+  description: 'Elige un jugador, ese jugador debe quitarse una prenda'
+  quote: ''
+  quantity: 4
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Tato'
+  description: 'Enseña tu cola a todos los jugadores'
+  quote: 'Siempre hay uno que le encanta mostrar la cola'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Impostor'
+  description: 'Finge un orgasmo'
+  quote: 'Se filma?'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Afrodita'
+  description: 'Gira el dado y besa donde indique, al jugador a tu derecha'
+  quote: 'Cuanto amorrrr'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+    - mano
+    - pie
+    - boca
+    - cara
+    - cuello
+    - cola
+    - pecho
+-
+  title: 'Contacto'
+  description: 'Haz girar el dado, debes jugar con la mano apoyada, en el jugador de la izquierda, donde salio el dado, hasta que alguno de los dos pierda'
+  quote: 'No homo'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+    - mano
+    - pie
+    - cara
+    - cuello
+    - cola
+    - pecho
+-
+  title: 'Karma Chameleon'
+  description: 'Imita 2 poses del kamasutra con el jugador a tu derecha'
+  quote: 'El balancin, el 69, la cuchara, el envoltorio'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Calzon'
+  description: 'Juega contra el jugador de enfrente, piedra, papel o tijera, el perdedor debe quitarse una prenda'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Exhibicionista'
+  description: 'Los jugadores que hayan tenido sexo en publico ganan'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Paraiso'
+  description: 'Los que están de novio besan al jugador a su derecha'
+  quote: 'Es solo un juego'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Recaida'
+  description: 'Los que se besaron alguna vez de aca vuelven a besarse'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Libertad'
+  description: 'Te toca, debes quitarte una prenda'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'Muerdago'
+  description: 'Toca las partes intimas del jugador de la izquierda'
+  quote: 'Rompiendo barreras'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+  dices:
+-
+  title: 'El pedido'
+  description: 'Cada vez que alguien quiera comunicarse con otra persona debe decirle antes "haceme la cola"'
+  quote: 'Que carta mas heavy'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+    - discord
+  dices:
+-
+  title: 'Regazo'
+  description: 'Todos los jugadores deben jugar con la mano apoyada en el regazo del jugador de la derecha'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+    - discord
+  dices:
+-
+  title: 'Regazo'
+  description: 'Todos los jugadores deben jugar con la mano apoyada en el regazo del jugador de la izquierda'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+    - discord
+  dices:
+-
+  title: 'La entrevista'
+  description: 'Todos los jugadores deben jugar sin pantalon'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+    - discord
+  dices:
+-
+  title: 'La playa'
+  description: 'Todos los jugadores deben jugar sin remera'
+  quote: 'Igualdad de genero!'
+  quantity: 1
+  timer:
+  tags:
+    - hardcore
+    - discord
+  dices:
+-
+  title: 'Arrow'
+  description: '<--- Hace girar el telefono, a quien apunte la flecha pierde'
+  quote: 'Aquel novato que pierda con la flecha deberia tomar... no?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Ojo de aguila'
+  description: 'A partir de ahora, el primero en parpadear pierde'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Ensalada de fruta'
+  description: 'Agarra una fruta y ponla en tú cabeza, si se cae pierdes tu y al que toque'
+  quote: 'Es solo por esta partida, no desesperes'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Rayo de la muerte'
+  description: 'Apunta a un jugador, este debe apuntar a otro y asi sucesivamente, el ultimo en ser apuntado pierde'
+  quote: 'Nadie me paga por escribir estas boludeces...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'La jungla'
+  description: 'Cada jugador debe elegir un animal e imitar su sonido, aquel que no lo haga bien pierde, no se puede repetir'
+  quote: 'vaca, muuuu...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Dinamico'
+  description: 'Cambia de lugar con el jugador de enfrente'
+  quote: 'Este es el mas complejo'
+  quantity: 2
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Dinamico'
+  description: 'Cambia de lugar con el jugador de la derecha'
+  quote: ''
+  quantity: 2
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Dinamico'
+  description: 'Cambia de lugar con el jugador de la izquierda'
+  quote: 'Izquierda, derecha, arriba, arriba, todos juntos!'
+  quantity: 2
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'El Apache Ness'
+  description: 'Debes bailar al ritmo de "mueve el toto" por lo proximos 30 segundos'
+  quote: 'To to to to... mueve el toto'
+  quantity: 1
+  timer: 30
+  tags:
+    - normal
+  dices:
+-
+  title: 'Maratonista'
+  description: 'Debes dar una vuelta completa alrededor de la mesa en menos de 10 segundos'
+  quote: ''
+  quantity: 1
+  timer: 10
+  tags:
+    - normal
+  dices:
+-
+  title: 'El clasico'
+  description: 'El hincha del equipo mas exitoso pierde'
+  quote: 'Aca empieza el debate'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'La vivi'
+  description: 'El jugador con yeso pierde, si nadie tiene yeso todos pierden'
+  quote: 'Como te rompiste?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Gandalf'
+  description: 'El jugador de mayor edad gana'
+  quote: '"You shall not pass"  --Gandalf'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Cain'
+  description: 'El jugador de mayor edad pierde'
+  quote: '"Hola, mi amigo. Quédate un rato y escucha"  --Deckard Cain'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Youngling'
+  description: 'El jugador de menor edad gana'
+  quote: '"Truly wonderful, the mind of a child is." --Yoda'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Anakin'
+  description: 'El jugador de menor edad pierde'
+  quote: '"Are you an Angel?" --Anakin '
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Aceite de coco'
+  description: 'El jugador de pelo mas largo pierde'
+  quote: 'Ayuda en crecer el pelo sano  y le da a su cabello una calidad brillante'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Mas rapido'
+  description: 'El ultimo en ponerse de pie pierde'
+  quote: 'Arriba, arriba, que la musica no pare'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Verdura'
+  description: 'El vegetariano pierde'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'La gran Dali'
+  description: 'Elige un jugador y haz girar el dado, debes hacerle un dibujo donde haya salido el dado, si no hay nada para hacer el dibujo el dueño de la casa pierde'
+  quote: 'No tiene nada de malo dibujarle un pene en la cara, seguro se lo merece'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+    - mano
+    - pie
+    - cara
+    - cuello
+    - cola
+    - pecho
+-
+  title: 'Fortuna'
+  description: 'Elige un jugador y juega con una moneda cara o seca contra el, si no hay monedas ambos pierden'
+  quote: 'Nunca se cual es la cara'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Daredevil'
+  description: 'Elige un jugador, debera jugar vendado, si no hay venda pierdes'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Shut the fuck up!'
+  description: 'Elige un jugador, no puede hablar hasta que gane o pierda'
+  quote: 'Silencio!'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Vikingo'
+  description: 'En cualquier momento hasta tu proximo turno, debes pararte y gritar "Por Thor". Todos los jugadores deben pretender remar tu barco, el ultimo en hacerlo pierde'
+  quote: 'Ha desobedecido a su rey. Su destino esta ahora en sus manos'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Campeon'
+  description: 'Ganaste, el resto pierde'
+  quote: 'Asi se juega carajo!'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'El bote'
+  description: 'Hasta que alguien pierda, "Llevo un barquito cargado de..."'
+  quote: 'Para los faltos de imaginacion... series, peliculas, nombres de huesos, lenguajes de programacion, escritores de filosofia'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Axe'
+  description: 'Huele la axila del jugador de la derecha'
+  quote: 'Que rico...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Digalo con mimica'
+  description: 'Imita una pelicula, los que no adivinan pierden'
+  quote: 'Te paras, sin hablar indicas cuantas palabras y la representas, nunca jugaste?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Rimas'
+  description: 'Inventa una frase. El jugador de la izquierda debe decir una frase que rime con la tuya, repetir hasta que alguien pierda'
+  quote: 'Cuando mires las estrellas acuérdate de mí, por que en cada una de ellas hay un beso para ti.'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Jankenpón'
+  description: 'Juega contra el jugador de enfrente piedra, papel o tijera'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Angloparlantes'
+  description: 'Los jugadores que hablan ingles pierden'
+  quote: 'What r u saying?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'iLoose'
+  description: 'Los jugadores que poseen un iphone pierden'
+  quote: 'Hola, steve? Me hiciste perder ameo'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Esclavos'
+  description: 'Los jugadores que tengan trabajo pierden'
+  quote: 'Muestra tus cadenas'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Musico'
+  description: 'Los jugadores que tocan instrumentos pierden'
+  quote: 'borom bom bom... bom bom...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Trotamundos'
+  description: 'Los jugadores que vivieron en otro pais pierden'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Madrugador'
+  description: 'Los que trabajan mañana pierden'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Tiempos modernos'
+  description: 'Los telefonos al centro de la mesa boca abajo, el que revisa pierde'
+  quote: 'Dije sin excepciones'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Game over'
+  description: 'Perdiste'
+  quote: 'Que carta mas aburrida! Pero perdiste igual ja!'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Showmatch'
+  description: 'Pon un tema musical, arma 2 parejas o elige 2 participantes para que compitan, los que no compiten eligen al ganador y el otro pierde'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Esto es re fruta'
+  description: 'Pon una fruta en la mesa, si hay mas de 3 frutas pierdes, si no hay frutas el dueño de la casa pierde'
+  quote: 'Hacele caso a la carta carajo!'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Personal'
+  description: 'Pregunta en voz alta a cada uno de los jugadores "Preferis un gato o un perro". Si la mayoria eligio perro pierdes'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Duelo'
+  description: 'Pulseada china contra un jugador a eleccion'
+  quote: 'No te vayas a romper el humero...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'La adolescencia'
+  description: 'Quienes sean menores de 25 pierden'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Sillas'
+  description: 'Quita una silla de la mesa, todos comienzan a girar alrededor de la mesa, cuando se acabe el tiempo el que se queda sin lugar pierde'
+  quote: 'Lucky perdera con su propia carta'
+  quantity: 1
+  timer: 40
+  tags:
+    - normal
+  dices:
+-
+  title: 'Mas furioso'
+  description: 'Guiñale el ojo al jugador enfrente tuyo, luego roba otra carta con furia'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Yo nunca...'
+  description: 'Ronda de yo nunca, es decir, cada jugador debe decir un "yo nunca..." hasta que haya un ganador'
+  quote: 'yo nunca jugue al yo nunca... what?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Instapic'
+  description: 'Selfie grupal a facebook o instagram, si no la suben en los proximos 30 segundos todos pierden'
+  quote: 'tic tac'
+  quantity: 1
+  timer: 30
+  tags:
+    - normal
+  dices:
+-
+  title: 'Chiquitin'
+  description: 'Si eres el de menor altura ganas, el resto pierde'
+  quote: 'Little boy'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Say my name'
+  description: 'Si tu nombre es Mariano ganas!'
+  quote: 'Classic Retonli'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'La Coco Sily'
+  description: 'Todas las mujeres pierden'
+  quote: 'Que injusto'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Perdedor'
+  description: 'Todos ganan, pero como todos no pueden ganar, solo tu pierdes'
+  quote: 'No es justo...'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Rascacielos'
+  description: 'Todos juegan parados, esta carta no cancela otras cartas, asi que si debes perder, pierdes'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Feminazi'
+  description: 'Todos los hombres pierden'
+  quote: 'Perdiste flaco dale'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Optimus'
+  description: 'Todos los jugadores deben levantar 1 o 2 dedos, si la suma da un numero par todos pierden'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Terror'
+  description: 'Todos pierden'
+  quote: 'Que amargura'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+  dices:
+-
+  title: 'Bullying'
+  description: 'Cada vez que un jugador pierda todos deben señalarlo y reirse'
+  quote: 'Cuanta maldad'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Educacion'
+  description: 'Los jugadores deben llamarse por "Sr." o "Sra." y el apellido'
+  quote: 'Hola Sr. Thompson'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'La interna'
+  description: 'Los jugadores deben llamarse por apodos'
+  quote: 'Cara de tutuca, te toca'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Palabras prohibidas'
+  description: 'Nadie puede decir "el", "la", "yo", "vos"'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Palabras prohibidas'
+  description: 'Nadie puede decir "si", "no", "tomar", "alcohol"'
+  quote: 'Que hay para beber?'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Manos quietas'
+  description: 'Nadie puede señalar'
+  quote: 'A quien le toca? jeje'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Formalidad'
+  description: 'Todos los jugadores deben hablar de manera formal, nadie se puede tutear'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Bullet time!'
+  description: 'Todos los jugadores deben hablar en camara lenta'
+  quote: ''
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Silencio'
+  description: 'Todos los jugadores deben susurrar, sino pierden'
+  quote: 'pst... fuiste vos? culiao anda al baño'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:
+-
+  title: 'Cambio cultural'
+  description: 'Todos los presentes deben hablar en español de España si son Latinos o en Latino si son Españoles'
+  quote: 'Pues tio, ya era hora'
+  quantity: 1
+  timer:
+  tags:
+    - normal
+    - discord
+  dices:

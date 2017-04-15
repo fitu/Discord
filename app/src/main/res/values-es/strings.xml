@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Discordia</string>
+    <string name="rules_card_rules_title">Reglas</string>
+    <string name="rules_card_rules_description">El objetivo del juego es ganar. Si pierdes, no ganas, y estás eliminado de la partida. Si todo el mundo excepto tu ha perdido, ¡ganas! Si hay alguna disputa la solución mas graciosa es la correcta. Si estás bebiendo puedes hacer que el que pierda deba tomar.</string>
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">Cerrar</string>
+    <string name="navigation_view_my_cards">Mis cartas</string>
+    <string name="navigation_view_settings">Configuracion</string>
+    <string name="navigation_view_license">Licencias</string>
+    <string name="navigation_view_authors">Autores</string>
+    <string name="navigation_view_rules">Reglas</string>
+    <string name="navigation_view_version">Version</string>
+    <string name="tv_dialog_rules">El objetivo del juego es ganar. Si pierdes, no ganas, y estás eliminado de la partida. Si todo el mundo excepto tu ha perdido, ¡ganas! Si hay alguna disputa la solución mas graciosa es la correcta. Si estás bebiendo puedes hacer que el que pierda deba tomar.</string>
+    <string name="error_message_card_description">La descripcion es obligatoria</string>
+    <string name="error_message_card_tag">El tag es obligatorio</string>
+    <string name="error_message_card_quantity">La cantidad debe ser al menos 1</string>
+
+    <string name="tv_authors_title">Autores</string>
+</resources>

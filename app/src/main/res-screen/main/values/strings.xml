@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_action_title_drink">drink</string>
+    <string name="menu_action_title_hardcore">hardcore</string>
+
+    <string name="menu_action_drink_on">Drink cards enabled</string>
+    <string name="menu_action_drink_off">Drink cards disabled</string>
+    <string name="menu_action_hardcore_on">Hardcore cards enabled</string>
+    <string name="menu_action_hardcore_off">Hardcore cards disabled</string>
+</resources>

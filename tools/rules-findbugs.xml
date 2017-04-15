@@ -1,0 +1,4 @@
+<FindBugsFilter>
+    <!--Add bugs like-->
+    <!--<Bug pattern="SF_SWITCH_NO_DEFAULT" />-->
+</FindBugsFilter>
