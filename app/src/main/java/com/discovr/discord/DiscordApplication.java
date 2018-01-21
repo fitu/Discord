@@ -3,7 +3,6 @@ package com.discovr.discord;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.StrictMode;
 
 import com.crashlytics.android.Crashlytics;
@@ -18,7 +17,6 @@ import io.fabric.sdk.android.Fabric;
 
 public class DiscordApplication extends Application implements HasActivityInjector {
     @Inject DispatchingAndroidInjector<Activity> injector;
-    @Inject SharedPreferences sharedPreferences;
     private static AppComponent appComponent;
 
     @Override

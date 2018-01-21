@@ -40,12 +40,4 @@ public class SettingManager {
                 .apply();
         return true;
     }
-
-    public boolean getBooleanValue(String key) {
-        return sharedPreferences.getBoolean(key, false);
-    }
-
-    public void saveBooleanValue(String key, boolean value) {
-        sharedPreferences.edit().putBoolean(key, value).apply();
-    }
 }

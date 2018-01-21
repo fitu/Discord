@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,11 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,14 +25,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.discovr.discord.R;
-import com.discovr.discord.data.manager.CardManager;
-import com.discovr.discord.model.Card;
-import com.discovr.discord.model.Tag;
 import com.discovr.discord.ui.main.card.CardFragment;
-import com.discovr.discord.ui.main.dialogs.RulesDialog;
-import com.discovr.discord.ui.main.discord.DiscordDialog;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -59,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements
     @Inject DispatchingAndroidInjector<Fragment> injector;
     @Inject MainContract.ActivityPresenter presenter;
     @Inject CardFragment cardFragment;
-    @Inject Subject<MainEvent> subject;
+    @Inject Subject<MainAction> actions;
     @Inject SensorManager sensorManager;
     @Inject Sensor accelerometer;
     @Inject SharedPreferences sharedPreferences;
@@ -77,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_dice:
-                subject.onNext(new MainEvent.RollDice());
+                // TODO dice not here
                 break;
             case R.id.fab:
-                showDialog(DiscordDialog.getDialog(presenter.getDiscordCard()), DiscordDialog.TAG);
+
                 break;
         }
     }
@@ -98,11 +86,12 @@ public class MainActivity extends AppCompatActivity implements
         ButterKnife.bind(this);
         seUpBarAndDrawer();
         subscribe();
-        addFragment(cardFragment, R.id.frg_container);
+  //      addFragment(cardFragment, R.id.frg_container);
     }
 
     private void seUpBarAndDrawer() {
         setSupportActionBar(toolbar);
+        // TODO bind string
         drawerToggle =new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         navigationView.setNavigationItemSelectedListener(this);
@@ -112,19 +101,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void subscribe() {
-        subject.doOnSubscribe(compositeDisposable::add)
+        actions.doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::actions);
     }
 
-    private void actions(MainEvent event) {
-        if (event instanceof MainEvent.SwipeLeft) {
-            presenter.notifyTopChanged();
-        }
-
-        if (event instanceof MainEvent.SwipeRight) {
-            presenter.notifyTopChanged();
-        }
+    private void actions(MainAction action) {
     }
 
     @Override
@@ -153,11 +135,10 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (item.getItemId()) {
             case R.id.menu_my_cards:
-
+                // TODO complete this
                 break;
             case R.id.menu_rules:
-                // TODO inject this?
-                showDialog(new RulesDialog(), RulesDialog.TAG);
+                // TODO complete this
                 break;
             case R.id.menu_settings:
                 // TODO complete this
@@ -183,8 +164,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        // TODO don't send a menu item
-        presenter.changeMenuIcon(menu);
         return true;
     }
 
@@ -192,10 +171,8 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_drink:
-                presenter.actionSelected(Tag.DRINK, item.getIcon());
                 break;
             case R.id.action_hardcore:
-                presenter.actionSelected(Tag.HARDCORE, item.getIcon());
                 break;
         }
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
@@ -218,96 +195,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showDialog(DialogFragment dialog, String tag) {
-        dialog.show(getSupportFragmentManager(), tag);
-    }
-
-    @Override
-    public void showMessage(int errorMessageId) {
-        Snackbar.make(coordinatorLayout, errorMessageId, Snackbar.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setDiceText(String face) {
-        tvDice.setText(face);
-    }
-
-    @Override
-    public void showDiceVisibility(int visibility) {
-        tvDice.setVisibility(visibility);
-    }
-
-    @Override
-    public void setDicePosition(int position, int left, int top, int right, int bottom) {
-        CoordinatorLayout.LayoutParams params =
-                new CoordinatorLayout.LayoutParams(tvDice.getLayoutParams());
-        params.gravity = position;
-        params.setMargins(left, top, right, bottom);
-        tvDice.setLayoutParams(params);
-    }
-
-    @Override
-    public void setIconColorAndAlpha(Drawable icon, int colorAccent) {
-        DrawableCompat.setTint(icon, ContextCompat.getColor(this, colorAccent));
-    }
-
-    @Override
-    public List<Card> getExtraCards() {
-        return CardManager.getExtraCards(this);
-    }
-
-    @Override
-    public String getStringById(int id) {
-        return getResources().getString(id);
-    }
-
-    @Override
-    public void setTimerPosition(int position, int left, int top, int right, int bottom) {
-        CoordinatorLayout.LayoutParams params =
-                new CoordinatorLayout.LayoutParams(tvTimer.getLayoutParams());
-        params.gravity = position;
-        params.setMargins(left, top, right, bottom);
-        tvTimer.setLayoutParams(params);
-    }
-
-    @Override
-    public void showTimerVisibility(int visibility) {
-        tvTimer.setVisibility(visibility);
-    }
-
-    @Override
-    public void setTimerText(String timer) {
-        tvTimer.setText(timer);
-    }
-
-    @Override
-    public List<Card> getActiveCards() {
-        return presenter.getActiveCards();
-    }
-
-    @Override
-    public void shuffleDeck() {
-        presenter.shuffleDeck();
-    }
-
-    @Override
-    public void removeRulesCard() {
-        presenter.removeRulesCard();
-    }
-
-    @Override
-    public int getTopPositionId() {
-        return 1;
-    }
-
-    @Override
-    public Context getActivity() {
-        return this;
-    }
-
-    @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        presenter.shakeDice(sensorEvent);
     }
 
     @Override

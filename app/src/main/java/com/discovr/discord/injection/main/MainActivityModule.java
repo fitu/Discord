@@ -8,14 +8,11 @@ import android.os.Vibrator;
 
 import com.discovr.discord.data.manager.SettingManager;
 import com.discovr.discord.injection.util.scope.ActivityScope;
+import com.discovr.discord.ui.main.MainAction;
 import com.discovr.discord.ui.main.MainActivity;
 import com.discovr.discord.ui.main.MainContract;
-import com.discovr.discord.ui.main.MainEvent;
 import com.discovr.discord.ui.main.MainPresenter;
 import com.discovr.discord.ui.main.card.CardFragment;
-import com.discovr.discord.ui.main.dialogs.RulesDialog;
-import com.discovr.discord.ui.main.dice.DiceManager;
-import com.discovr.discord.ui.main.timer.TimerManager;
 
 import dagger.Binds;
 import dagger.Module;
@@ -28,30 +25,27 @@ import io.reactivex.subjects.Subject;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 
-@Module(subcomponents = {CardFragmentComponent.class, DiscordDialogComponent.class})
+@Module(subcomponents = {CardFragmentComponent.class})
 public abstract class MainActivityModule {
     @Binds
     @IntoMap
     @ActivityKey(MainActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity> bindActivityDeckInjectorFactory(
+    abstract AndroidInjector.Factory<? extends Activity> bindActivityInjectorFactory(
             MainActivityComponent.Builder builder);
 
     @Binds
     @ActivityScope
-    abstract MainContract.Activity bindMainActivity(MainActivity activity);
+    abstract MainContract.Activity bindActivity(MainActivity activity);
 
     @Binds
     @ActivityScope
-    abstract MainContract.CardFragment bindCardFragment(CardFragment fragment);
+    abstract MainContract.CardFragment bindFragment(CardFragment fragment);
 
     @Provides
     @ActivityScope
     static MainContract.ActivityPresenter provideActivityPresenter(
-            MainContract.Activity activity,
-            DiceManager diceManager,
-            TimerManager timerManager,
-            SettingManager settingManager) {
-        return new MainPresenter(activity, diceManager, timerManager, settingManager);
+            MainContract.Activity activity, SettingManager settingManager) {
+        return new MainPresenter(activity, settingManager);
     }
 
     @Provides
@@ -62,26 +56,8 @@ public abstract class MainActivityModule {
 
     @Provides
     @ActivityScope
-    static RulesDialog provideDialogRules() {
-        return new RulesDialog();
-    }
-
-    @Provides
-    @ActivityScope
-    static TimerManager provideTimerManager(Subject<MainEvent> subject, Vibrator vibrator) {
-        return new TimerManager(subject, vibrator);
-    }
-
-    @Provides
-    @ActivityScope
     static Vibrator provideVibrator(MainActivity activity) {
         return (Vibrator) activity.getSystemService(VIBRATOR_SERVICE);
-    }
-
-    @Provides
-    @ActivityScope
-    static DiceManager provideDiceManager(Subject<MainEvent> subject) {
-        return new DiceManager(subject);
     }
 
     @Provides
@@ -98,7 +74,7 @@ public abstract class MainActivityModule {
 
     @Provides
     @ActivityScope
-    static Subject<MainEvent> provideSubject() {
+    static Subject<MainAction> provideSubject() {
         return PublishSubject.create();
     }
 }

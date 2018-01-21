@@ -21,16 +21,16 @@ public abstract class SplashActivityModule {
     @Binds
     @IntoMap
     @ActivityKey(SplashActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity> bindSplashActivityInjectorFactory(
+    abstract AndroidInjector.Factory<? extends Activity> bindActivityInjectorFactory(
             SplashActivityComponent.Builder builder);
 
     @Binds
     @ActivityScope
-    abstract SplashContract.View provideSplashActivity(SplashActivity activity);
+    abstract SplashContract.View provideActivity(SplashActivity activity);
 
     @Provides
     @ActivityScope
-    static SplashContract.Presenter provideSplashPresenter(
+    static SplashContract.Presenter providePresenter(
             SplashContract.View activity,
             CardManager cardManager,
             SettingManager settingManager) {
