@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements
         ButterKnife.bind(this);
         seUpBarAndDrawer();
         subscribe();
-  //      addFragment(cardFragment, R.id.frg_container);
+        addFragment(cardFragment, R.id.frg_container);
     }
 
     private void seUpBarAndDrawer() {
