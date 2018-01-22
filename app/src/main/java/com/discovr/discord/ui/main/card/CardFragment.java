@@ -34,7 +34,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
 
-    @BindView(R.id.swipe_view) SwipePlaceHolderView swipeView;
+    @BindView(R.id.swipe_place_holder_view) SwipePlaceHolderView swipePlaceHolderView;
 
     @Override
     public void onAttach(Context context) {
@@ -56,15 +56,16 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
 
     private void actions(MainAction action) {
         if (action instanceof MainAction.SwipeLeft) {
-            swipe(((MainAction.SwipeLeft) action).getPosition());
+            addCard("Left");
         }
 
         if (action instanceof MainAction.SwipeRight) {
-            swipe(((MainAction.SwipeRight) action).getPosition());
+            addCard("Right");
         }
     }
 
-    private void swipe(int position) {
+    private void addCard(String direction) {
+        swipePlaceHolderView.addView(new CardSwipeView(Card.builder().title(direction).build(), actions));
     }
 
     @Override
@@ -72,40 +73,42 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_deck_card, container, false);
         unbinder = ButterKnife.bind(this, layout);
-        swipeView.getBuilder()
+        setUpSwipeView();
+        return layout;
+    }
+
+    private void setUpSwipeView() {
+        swipePlaceHolderView.getBuilder()
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f));
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        addCardsToView(getCards());
+    }
+
+    private List<Card> getCards() {
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            cards.add(Card.builder().title("Title" + i).build());
+            cards.add(Card.builder().title("" + i).build());
         }
+        return cards;
+    }
 
-        for(Card card : cards){
-            swipeView.addView(new CardSwipe(card, swipeView));
+    private void addCardsToView(List<Card> cards) {
+        for (Card card : cards) {
+            swipePlaceHolderView.addView(new CardSwipeView(card, actions));
         }
-
-        /*
-            case R.id.rejectBtn:
-                swipeView.doSwipe(false);
-            case R.id.acceptBtn:
-                swipeView.doSwipe(true);
-         */
-        return layout;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        compositeDisposable.clear();
     }
 
     @Override

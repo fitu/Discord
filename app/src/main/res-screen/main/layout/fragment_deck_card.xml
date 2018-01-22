@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray">
     <com.mindorks.placeholderview.SwipePlaceHolderView
-        android:id="@+id/swipe_view"
+        android:id="@+id/swipe_place_holder_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </FrameLayout>
