@@ -5,18 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.discovr.discord.R;
+import com.discovr.discord.data.manager.CardManager;
 import com.discovr.discord.model.Card;
 import com.discovr.discord.ui.main.MainAction;
 import com.discovr.discord.ui.main.MainContract;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,11 +28,17 @@ import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.Subject;
 
 public class CardFragment extends Fragment implements MainContract.CardFragment {
+    private static final String TAG = "CardFragment";
+
     @Inject Subject<MainAction> actions;
+    @Inject CardManager cardManager;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private int currentCount = 0;
+    private int cardsSize = 0;
     private Unbinder unbinder;
 
     @BindView(R.id.swipe_place_holder_view) SwipePlaceHolderView swipePlaceHolderView;
@@ -56,16 +63,19 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
 
     private void actions(MainAction action) {
         if (action instanceof MainAction.SwipeLeft) {
-            addCard("Left");
+            swipe();
         }
 
         if (action instanceof MainAction.SwipeRight) {
-            addCard("Right");
+            swipe();
         }
     }
 
-    private void addCard(String direction) {
-        swipePlaceHolderView.addView(new CardSwipeView(Card.builder().title(direction).build(), actions));
+    private void swipe() {
+        if (cardsSize - currentCount < 3) {
+            // TODO get random batch
+          //  swipePlaceHolderView.addView(new CardSwipeView(getCard(), actions));
+        }
     }
 
     @Override
@@ -88,21 +98,22 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     @Override
     public void onStart() {
         super.onStart();
-        addCardsToView(getCards());
-    }
-
-    private List<Card> getCards() {
-        List<Card> cards = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            cards.add(Card.builder().title("" + i).build());
-        }
-        return cards;
+        cardManager.getCards()
+                .doOnSubscribe(compositeDisposable::add)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::addCardsToView, this::error);
     }
 
     private void addCardsToView(List<Card> cards) {
+        cardsSize = cards.size();
         for (Card card : cards) {
             swipePlaceHolderView.addView(new CardSwipeView(card, actions));
         }
+    }
+
+    private void error(Throwable throwable) {
+        Log.e(TAG, throwable.getMessage());
     }
 
     @Override

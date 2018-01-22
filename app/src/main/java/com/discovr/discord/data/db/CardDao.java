@@ -11,14 +11,17 @@ import com.discovr.discord.model.Card;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 @Dao
 public interface CardDao {
 
+    // TODO add random
     @Query("SELECT * FROM card")
-    List<Card> getAll();
+    Single<List<Card>> getAll();
 
     @Query("SELECT * FROM card WHERE id LIKE :id")
-    Card findById(int id);
+    Single<Card> findById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     List<Long> insertAll(List<Card> card);

@@ -21,6 +21,8 @@ public class CardSwipeView {
     private static final String TAG = "CardSwipeView";
 
     @View(R.id.tv_title) private TextView tvTitle;
+    @View(R.id.tv_description) private TextView tvDescription;
+    @View(R.id.tv_quote) private TextView tvQuote;
 
     private final Card card;
     private final Subject<MainAction> actions;
@@ -33,6 +35,8 @@ public class CardSwipeView {
     @Resolve
     private void onResolved() {
         tvTitle.setText(card.getTitle());
+        tvDescription.setText(card.getDescription());
+        tvQuote.setText(card.getQuote());
     }
 
     @SwipeOut

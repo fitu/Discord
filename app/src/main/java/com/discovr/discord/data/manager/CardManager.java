@@ -1,7 +1,5 @@
 package com.discovr.discord.data.manager;
 
-import android.content.Context;
-
 import com.discovr.discord.data.db.CardDao;
 import com.discovr.discord.data.db.DiscordDb;
 import com.discovr.discord.data.parser.CardYaml;
@@ -9,18 +7,15 @@ import com.discovr.discord.data.parser.CardYamlParser;
 import com.discovr.discord.data.parser.ParserException;
 import com.discovr.discord.model.Card;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class CardManager {
-    public static final String DEFAULT_CARDS_DIRECTORY = "raw";
-    public static final String DEFAULT_CARDS_FILENAME = "cards";
-
     private final CardDao cardDao;
     private final CardYamlParser yamlParser;
 
@@ -32,7 +27,18 @@ public class CardManager {
 
     public Observable<Boolean> loadCards() throws ParserException {
         List<Card> cards = CardYaml.toCards(yamlParser.loadCards());
-        return saveCardsToDb(cards);
+        List<Card> repeatedCards = getCardByQuantity(cards);
+        return saveCardsToDb(repeatedCards);
+    }
+
+    private List<Card> getCardByQuantity(List<Card> cards) {
+        // TODO is ok here? or should do it when retrieving cards
+        List<Card> repeatedCards = new ArrayList<>();
+        for (Card card : cards) {
+            for (int quantity = 1; quantity <= card.getQuantity(); quantity++)
+                repeatedCards.add(card);
+        }
+        return repeatedCards;
     }
 
     private Observable<Boolean> saveCardsToDb(List<Card> cards) {
@@ -43,37 +49,7 @@ public class CardManager {
         return Observable.just(false);
     }
 
-
-    // TODO replace all this
-    public static boolean isValid(Card card) {
-        return true;
-    }
-
-    public static int getErrorMessage() {
-        return 1;
-    }
-
-    public static List<Card> getExtraCards(Context context) {
-        return new ArrayList<>();
-    }
-
-    public static boolean isValidTitle(String title) {
-        return true;
-    }
-
-    public static boolean isValidQuote(String quote) {
-        return true;
-    }
-
-    public static boolean isValidTimer(int timer) {
-        return true;
-    }
-
-    public static boolean isValidDice(List<String> dices) {
-        return true;
-    }
-
-    public static List<Card> parseFromYaml(InputStream cardsFile) {
-        return new ArrayList<>();
+    public Single<List<Card>> getCards() {
+        return cardDao.getAll();
     }
 }

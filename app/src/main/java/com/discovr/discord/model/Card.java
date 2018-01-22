@@ -15,8 +15,6 @@ import java.util.List;
 public class Card implements Parcelable {
     public static final String FILE_NAME = "cards";
     public static final String FILE_DIRECTORY = "raw";
-    // TODO this?
-    public static final int RULES_CARD_ID = 0;
 
     @PrimaryKey(autoGenerate = true) private Integer id;
     @ColumnInfo private Integer quantity;
