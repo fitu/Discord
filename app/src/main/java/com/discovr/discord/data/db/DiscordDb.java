@@ -6,7 +6,7 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.discovr.discord.model.Card;
 
-@Database(entities = {Card.class}, version = 1)
+@Database(entities = {Card.class}, version = 1, exportSchema = false)
 @TypeConverters(ListConverter.class)
 public abstract class DiscordDb extends RoomDatabase {
     public static final String NAME = "DISCORD_DB";
