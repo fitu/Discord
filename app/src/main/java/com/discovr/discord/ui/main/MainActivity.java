@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deck);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         seUpBarAndDrawer();
         subscribe();
