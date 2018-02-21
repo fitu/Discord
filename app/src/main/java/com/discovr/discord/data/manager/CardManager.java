@@ -26,7 +26,7 @@ public class CardManager {
     }
 
     public Observable<Boolean> loadCards() throws ParserException {
-        List<Card> cards = CardYaml.toCards(yamlParser.loadCards());
+        List<Card> cards = CardYaml.Companion.toCards(yamlParser.loadCards());
         List<Card> repeatedCards = getCardByQuantity(cards);
         return saveCardsToDb(repeatedCards);
     }

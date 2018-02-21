@@ -28,8 +28,8 @@ public class SettingManager {
 
     private boolean setDefaultValues() {
         sharedPreferences.edit()
-                .putBoolean(Tag.DRINK, false)
-                .putBoolean(Tag.HARDCORE, false)
+                .putBoolean(Tag.DRINK.name(), false)
+                .putBoolean(Tag.HARDCORE.name(), false)
                 .apply();
         return true;
     }
