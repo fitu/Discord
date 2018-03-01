@@ -26,8 +26,14 @@
 
 -keep class com.discovr.game.ui.deck.swipedeck.SwipeDeck$* { *; }
 
-# snakeyaml
+# Snakeyaml
 -keep class org.yaml.snakeyaml.** { public protected private *; }
 -keep class org.yaml.snakeyaml.** { public protected private *; }
 -dontwarn org.yaml.snakeyaml.**
 -dontwarn com.fasterxml.jackson.databind.ext.**
+
+# PlaceHolderView
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @com.mindorks.placeholderview.annotations.** <methods>;
+}

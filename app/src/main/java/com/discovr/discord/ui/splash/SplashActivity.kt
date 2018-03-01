@@ -13,11 +13,11 @@ import javax.inject.Inject
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
 
-class SplashActivity : AppCompatActivity(), SplashContract.View {
-    var presenter: SplashContract.Presenter? = null
-        @Inject set
-    var settingManager: SettingManager? = null
-        @Inject set
+class SplashActivity : AppCompatActivity(),
+        SplashContract.View {
+
+    var presenter: SplashContract.Presenter? = null @Inject set
+    var settingManager: SettingManager? = null @Inject set
 
     companion object {
         private const val TAG = "SplashActivity"

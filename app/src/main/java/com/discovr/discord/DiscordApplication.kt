@@ -13,9 +13,10 @@ import dagger.android.HasActivityInjector
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
 
-class DiscordApplication : Application(), HasActivityInjector {
-    var injector: DispatchingAndroidInjector<Activity>? = null
-        @Inject set
+class DiscordApplication : Application(),
+        HasActivityInjector {
+
+    var injector: DispatchingAndroidInjector<Activity>? = null @Inject set
 
     companion object {
         var appComponent: AppComponent? = null

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawerLayout"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +11,7 @@
 
     <!-- This LinearLayout represents the contents of the screen  -->
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/cl_activity"
+        android:id="@+id/clActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
@@ -23,14 +23,14 @@
             android:layout_height="wrap_content" />
 
         <FrameLayout
-            android:id="@+id/frg_container"
+            android:id="@+id/frgContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="75dp"
             android:layout_gravity="center" />
 
         <TextView
-            android:id="@+id/tv_dice"
+            android:id="@+id/tvDice"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:gravity="center"
@@ -44,7 +44,7 @@
             android:background="@drawable/dice"/>
 
         <TextView
-            android:id="@+id/tv_timer"
+            android:id="@+id/tvTimer"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:gravity="center"
@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:clickable="true"
+            android:focusable="true"
             android:src="@mipmap/ic_discord"
             android:layout_gravity="end|bottom" />
 
@@ -71,7 +72,7 @@
 
     <!-- The navigation drawer that comes from the left -->
     <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

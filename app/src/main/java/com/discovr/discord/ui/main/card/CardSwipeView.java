@@ -20,9 +20,9 @@ import io.reactivex.subjects.Subject;
 public class CardSwipeView {
     private static final String TAG = "CardSwipeView";
 
-    @View(R.id.tv_title) private TextView tvTitle;
-    @View(R.id.tv_description) private TextView tvDescription;
-    @View(R.id.tv_quote) private TextView tvQuote;
+    @View(R.id.tvTitle) private TextView tvTitle;
+    @View(R.id.tvDescription) private TextView tvDescription;
+    @View(R.id.tvQuote) private TextView tvQuote;
 
     private final Card card;
     private final Subject<MainAction> actions;

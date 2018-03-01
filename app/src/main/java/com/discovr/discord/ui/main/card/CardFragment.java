@@ -41,7 +41,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private int cardsSize = 0;
     private Unbinder unbinder;
 
-    @BindView(R.id.swipe_place_holder_view) SwipePlaceHolderView swipePlaceHolderView;
+    @BindView(R.id.swipePlaceHolder) SwipePlaceHolderView swipePlaceHolderView;
 
     @Override
     public void onAttach(Context context) {
@@ -74,7 +74,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private void swipe() {
         if (cardsSize - currentCount < 3) {
             // TODO get random batch
-          //  swipePlaceHolderView.addView(new CardSwipeView(getCard(), actions));
+            //  swipePlaceHolderView.addView(new CardSwipeView(getCard(), actions));
         }
     }
 
