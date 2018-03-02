@@ -14,7 +14,8 @@ import javax.inject.Inject
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class CardManager @Inject
+class CardManager
+@Inject
 constructor(db: DiscordDb, private val yamlParser: CardYamlParser) {
     private val cardDao: CardDao = db.cardDao()
 
