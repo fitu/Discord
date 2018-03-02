@@ -31,6 +31,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.Subject;
 
+// TODO this class has to be Java because swipePlaceHolder is not compatible
 public class CardFragment extends Fragment implements MainContract.CardFragment {
     private static final String TAG = "CardFragment";
 
@@ -41,7 +42,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private int cardsSize = 0;
     private Unbinder unbinder;
 
-    @BindView(R.id.swipePlaceHolder) SwipePlaceHolderView swipePlaceHolderView;
+    @BindView(R.id.swipePlaceHolder) SwipePlaceHolderView swipePlaceHolder;
 
     @Override
     public void onAttach(Context context) {
@@ -88,7 +89,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     }
 
     private void setUpSwipeView() {
-        swipePlaceHolderView.getBuilder()
+        swipePlaceHolder.getBuilder()
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(20)
@@ -108,7 +109,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private void addCardsToView(List<Card> cards) {
         cardsSize = cards.size();
         for (Card card : cards) {
-            swipePlaceHolderView.addView(new CardSwipeView(card, actions));
+            swipePlaceHolder.addView(new CardSwipeView(card, actions));
         }
     }
 
