@@ -22,7 +22,7 @@ import dagger.multibindings.IntoMap
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
-@Module(subcomponents = arrayOf(CardFragmentComponent::class))
+@Module(subcomponents = [CardFragmentComponent::class])
 abstract class MainActivityModuleBind {
     @Binds
     @IntoMap

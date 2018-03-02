@@ -13,7 +13,7 @@ import javax.inject.Singleton
 import dagger.Module
 import dagger.Provides
 
-@Module(subcomponents = arrayOf(SplashActivityComponent::class, MainActivityComponent::class))
+@Module(subcomponents = [SplashActivityComponent::class, MainActivityComponent::class])
 class AppModule {
 
     @Singleton

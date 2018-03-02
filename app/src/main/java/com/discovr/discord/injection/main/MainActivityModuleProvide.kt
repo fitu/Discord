@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
 
-@Module(subcomponents = arrayOf(CardFragmentComponent::class))
+@Module(subcomponents = [CardFragmentComponent::class])
 class MainActivityModuleProvide {
     @Provides
     @ActivityScope

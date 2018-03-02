@@ -2,17 +2,20 @@ package com.discovr.discord.data.parser
 
 import com.discovr.discord.model.Card
 
-class CardYaml(
-        val id: Int,
-        val quantity: Int,
-        val title: String,
-        val description: String,
-        val quote: String,
-        val timer: Int,
-        val dices: List<String>,
-        val tags: List<String>) {
+import java.util.ArrayList
+
+class CardYaml {
+    var id: Int? = null
+    var quantity: Int? = null
+    var title: String? = null
+    var description: String? = null
+    var quote: String? = null
+    var timer: Int? = null
+    var dices: List<String>? = null
+    var tags: List<String>? = null
 
     companion object {
+
         fun toCards(cardYamls: List<CardYaml>): List<Card> {
             return cardYamls.map { CardYaml.toCard(it) }
         }
