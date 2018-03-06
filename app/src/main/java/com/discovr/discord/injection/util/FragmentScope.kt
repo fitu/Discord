@@ -1,4 +1,4 @@
-package com.discovr.discord.injection.util.scope
+package com.discovr.discord.injection.util
 
 import javax.inject.Scope
 

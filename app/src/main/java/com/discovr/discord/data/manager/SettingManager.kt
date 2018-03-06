@@ -19,22 +19,20 @@ constructor(private val sharedPreferences: SharedPreferences) {
         const val KEY_FIRST_TIME = "KEY_FIRST_TIME"
     }
 
-    fun setUpApp(): Observable<Boolean> {
-        return Observable.just(setDefaultValues())
-    }
-
-    private fun setDefaultValues(): Boolean {
-        sharedPreferences.edit()
-                .putBoolean(Tag.DRINK.name, false)
-                .putBoolean(Tag.HARDCORE.name, false)
-                .apply()
-        return true
-    }
-
     fun notFirstTime(isFirstTime: Boolean): Boolean {
         sharedPreferences.edit()
                 .putBoolean(KEY_FIRST_TIME, !isFirstTime)
                 .apply()
         return true
+    }
+
+    fun getValue(tag: Tag): Boolean {
+        return sharedPreferences.getBoolean(tag.name, false)
+    }
+
+    fun setValue(tag: Tag, value: Boolean) {
+        sharedPreferences.edit()
+                .putBoolean(tag.name, value)
+                .apply()
     }
 }

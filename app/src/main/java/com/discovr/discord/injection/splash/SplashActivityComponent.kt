@@ -1,6 +1,6 @@
 package com.discovr.discord.injection.splash
 
-import com.discovr.discord.injection.util.scope.ActivityScope
+import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.splash.SplashActivity
 
 import dagger.Subcomponent

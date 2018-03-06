@@ -1,6 +1,6 @@
 package com.discovr.discord.injection.main
 
-import com.discovr.discord.injection.util.scope.ActivityScope
+import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.main.MainActivity
 
 import dagger.Subcomponent

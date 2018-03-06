@@ -25,13 +25,13 @@ class SplashPresenter
     }
 
     private fun setUp(event: SplashEvent.Start): Observable<SplashModel> {
-        return if (!event.isFirstTime) {
+        return if (!event.isFirstTime)
             Observable.just(SplashModel.NotFirstTime())
-        } else settingManager.setUpApp()
-                .flatMap { cardManager.loadCards() }
-                .doOnNext({ settingManager.notFirstTime(it) })
-                .map { SplashModel.FirstTime() as SplashModel }
-                .onErrorReturn({ SplashModel.Error(it) })
+        else
+            cardManager.loadCards()
+                    .doOnNext({ settingManager.notFirstTime(it) })
+                    .map { SplashModel.FirstTime() as SplashModel }
+                    .onErrorReturn({ SplashModel.Error(it) })
     }
 
     override fun clear() {

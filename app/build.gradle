@@ -93,7 +93,7 @@ dependencies {
 
     implementation 'android.arch.persistence.room:runtime:1.0.0'
     implementation 'android.arch.persistence.room:rxjava2:1.0.0'
-    kapt 'android.arch.lifecycle:common-java8:1.1.0'
+    kapt 'android.arch.persistence.room:compiler:1.0.0'
 
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     kapt 'com.google.dagger:dagger-compiler:2.14.1'
@@ -127,6 +127,6 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     })
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.21"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.30"
     implementation "org.jetbrains.anko:anko-common:0.10.0"
 }

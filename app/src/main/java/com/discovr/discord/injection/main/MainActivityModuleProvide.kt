@@ -5,12 +5,13 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Vibrator
 import com.discovr.discord.data.manager.SettingManager
-import com.discovr.discord.injection.util.scope.ActivityScope
+import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.main.MainAction
 import com.discovr.discord.ui.main.MainActivity
 import com.discovr.discord.ui.main.MainContract
 import com.discovr.discord.ui.main.MainPresenter
 import com.discovr.discord.ui.main.card.CardFragment
+import com.discovr.discord.ui.main.util.IconHelper
 import dagger.Module
 import dagger.Provides
 import io.reactivex.subjects.PublishSubject
@@ -21,15 +22,22 @@ import io.reactivex.subjects.Subject
 class MainActivityModuleProvide {
     @Provides
     @ActivityScope
-    internal fun provideActivityPresenter(
-            activity: MainContract.Activity, settingManager: SettingManager): MainContract.ActivityPresenter {
-        return MainPresenter(activity, settingManager)
+    internal fun provideActivityPresenter(activity: MainContract.Activity,
+                                          settingManager: SettingManager,
+                                          iconHelper: IconHelper): MainContract.ActivityPresenter {
+        return MainPresenter(activity, settingManager, iconHelper)
     }
 
     @Provides
     @ActivityScope
     internal fun provideCardFragment(): CardFragment {
         return CardFragment()
+    }
+
+    @Provides
+    @ActivityScope
+    internal fun provideIconHelper(context: Context, settingManager: SettingManager): IconHelper {
+        return IconHelper(context, settingManager)
     }
 
     @Provides

@@ -1,6 +1,6 @@
 package com.discovr.discord.injection.main
 
-import com.discovr.discord.injection.util.scope.FragmentScope
+import com.discovr.discord.injection.util.FragmentScope
 import com.discovr.discord.ui.main.card.CardFragment
 
 import dagger.Subcomponent
