@@ -14,8 +14,7 @@ import io.reactivex.Single
 @Dao
 interface CardDao {
 
-    // TODO add random
-    @Query("SELECT * FROM card")
+    @Query("SELECT * FROM card ORDER BY RANDOM()")
     fun findAll(): Single<List<Card>>
 
     @Query("SELECT * FROM card WHERE id LIKE :id")

@@ -31,7 +31,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.Subject;
 
-// TODO this class has to be Java because swipePlaceHolder is not compatible
+// This class has to be Java because swipePlaceHolder is not compatible
 public class CardFragment extends Fragment implements MainContract.CardFragment {
     private static final String TAG = "CardFragment";
 
