@@ -32,7 +32,6 @@ class SplashPresenter
                 .doOnNext({ settingManager.notFirstTime(it) })
                 .map { SplashModel.FirstTime() as SplashModel }
                 .onErrorReturn({ SplashModel.Error(it) })
-
     }
 
     override fun clear() {

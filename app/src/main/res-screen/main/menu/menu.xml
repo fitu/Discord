@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.MainActivity">
     <item
-        android:id="@+id/action_drink"
+        android:id="@+id/actionDrink"
         android:orderInCategory="100"
         android:title="@string/menu_action_title_drink"
-        android:icon="@mipmap/ic_menu_drink"
+        android:icon="@drawable/ic_menu_drink"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_hardcore"
+        android:id="@+id/actionHardcore"
         android:orderInCategory="300"
         android:title="@string/menu_action_title_hardcore"
-        android:icon="@mipmap/ic_menu_hardcore"
+        android:icon="@drawable/ic_menu_hardcore"
         app:showAsAction="ifRoom" />
 </menu>

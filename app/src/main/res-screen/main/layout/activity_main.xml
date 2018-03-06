@@ -64,7 +64,7 @@
             android:layout_margin="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@mipmap/ic_discord"
+            android:src="@drawable/ic_discord"
             android:layout_gravity="end|bottom" />
 
         <!-- The main content view where fragments are loaded -->

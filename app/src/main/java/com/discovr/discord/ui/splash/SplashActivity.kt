@@ -54,7 +54,7 @@ class SplashActivity : AppCompatActivity(),
             return
         }
 
-        throw IllegalArgumentException("Don't know how to render model " + model)
+        throw IllegalArgumentException("Don't know how to render model $model")
     }
 
     private fun goToMain() {

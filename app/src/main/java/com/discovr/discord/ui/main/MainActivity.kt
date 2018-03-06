@@ -99,7 +99,20 @@ class MainActivity : AppCompatActivity(),
                 .subscribe({ this.actions(it) })
     }
 
-    private fun actions(action: MainAction) {}
+    private fun actions(action: MainAction) {
+        when (action) {
+            is MainAction.DrinkClick -> drinkClick(action.item)
+            is MainAction.HardcoreClick -> hardcoreClick(action.item)
+        }
+    }
+
+    private fun drinkClick(item: MenuItem) {
+        item.setIcon(R.drawable.ic_menu_drink_tinted)
+    }
+
+    private fun hardcoreClick(item: MenuItem) {
+
+    }
 
     override fun onStart() {
         super.onStart()
@@ -151,9 +164,11 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_drink -> {
+            R.id.actionDrink -> {
+                actions!!.onNext(MainAction.DrinkClick(item))
             }
-            R.id.action_hardcore -> {
+            R.id.actionHardcore -> {
+                actions!!.onNext(MainAction.HardcoreClick(item))
             }
         }
         return drawerToggle!!.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
