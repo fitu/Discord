@@ -21,15 +21,9 @@ constructor(private val db: DiscordDb,
     private val cardDao: CardDao = db.cardDao()
 
     fun getCards(): Single<List<Card>> {
-        val isDrinkSet = settingManager.getValue(Tag.DRINK)
-        val isHardcoreSet = settingManager.getValue(Tag.HARDCORE)
-        return cardDao.findAll()
-                .toObservable()
-                .flatMapIterable({it})
-                .filter({!it.tags!!.contains(Tag.DISCORD.name)})
-                .filter({isDrinkSet or !it.tags!!.contains(Tag.DRINK.name)})
-                .filter({isHardcoreSet or !it.tags!!.contains(Tag.HARDCORE.name)})
-                .toList()
+        val isDrinkSet = if (settingManager.getValue(Tag.DRINK)) 1 else 0
+        val isHardcoreSet = if (settingManager.getValue(Tag.HARDCORE)) 1 else 0
+        return cardDao.findAllWithFlags(isDrinkSet, isHardcoreSet)
     }
 
     @Throws(ParserException::class)
