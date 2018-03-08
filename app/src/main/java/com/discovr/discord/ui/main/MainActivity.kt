@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity(),
     var sensorManager: SensorManager? = null @Inject set
     var accelerometer: Sensor? = null @Inject set
 
-    var sharedPreferences: SharedPreferences? = null
-
     private var drawerToggle: ActionBarDrawerToggle? = null
     private val compositeDisposable = CompositeDisposable()
 

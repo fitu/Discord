@@ -1,26 +1,36 @@
 package com.discovr.discord.data.manager
 
+import android.util.Log
 import com.discovr.discord.data.db.CardDao
 import com.discovr.discord.data.db.DiscordDb
 import com.discovr.discord.data.parser.CardYaml
 import com.discovr.discord.data.parser.CardYamlParser
 import com.discovr.discord.data.parser.ParserException
 import com.discovr.discord.model.Card
-
-import java.util.ArrayList
-
-import javax.inject.Inject
-
+import com.discovr.discord.model.Tag
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.util.*
+import javax.inject.Inject
 
 class CardManager
 @Inject
-constructor(db: DiscordDb, private val yamlParser: CardYamlParser) {
+constructor(private val db: DiscordDb,
+            private val settingManager: SettingManager,
+            private val yamlParser: CardYamlParser) {
     private val cardDao: CardDao = db.cardDao()
 
-    val cards: Single<List<Card>>
-        get() = cardDao.findAll()
+    fun getCards(): Single<List<Card>> {
+        val isDrinkSet = settingManager.getValue(Tag.DRINK)
+        val isHardcoreSet = settingManager.getValue(Tag.HARDCORE)
+        return cardDao.findAll()
+                .toObservable()
+                .flatMapIterable({it})
+                .filter({!it.tags!!.contains(Tag.DISCORD.name)})
+                .filter({isDrinkSet or !it.tags!!.contains(Tag.DRINK.name)})
+                .filter({isHardcoreSet or !it.tags!!.contains(Tag.HARDCORE.name)})
+                .toList()
+    }
 
     @Throws(ParserException::class)
     fun loadCards(): Observable<Boolean> {

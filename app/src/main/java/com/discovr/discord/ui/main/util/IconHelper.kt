@@ -20,12 +20,14 @@ class IconHelper
         for (item in menu.itemsSequence()) {
             when (item.itemId) {
                 R.id.actionDrink -> {
-                    if (settingManager.getValue(Tag.DRINK))
+                    if (settingManager.getValue(Tag.DRINK)) {
                         changeColor(item, item.icon, android.R.color.holo_green_light)
+                    }
                 }
                 R.id.actionHardcore -> {
-                    if (settingManager.getValue(Tag.HARDCORE))
+                    if (settingManager.getValue(Tag.HARDCORE)) {
                         changeColor(item, item.icon, android.R.color.holo_red_light)
+                    }
                 }
             }
         }

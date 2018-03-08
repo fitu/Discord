@@ -26,8 +26,10 @@ class ManagerModule {
 
     @Singleton
     @Provides
-    internal fun provideCardManager(db: DiscordDb, yamlParser: CardYamlParser): CardManager {
-        return CardManager(db, yamlParser)
+    internal fun provideCardManager(db: DiscordDb,
+                                    settingManager: SettingManager,
+                                    yamlParser: CardYamlParser): CardManager {
+        return CardManager(db, settingManager, yamlParser)
     }
 
     @Singleton
