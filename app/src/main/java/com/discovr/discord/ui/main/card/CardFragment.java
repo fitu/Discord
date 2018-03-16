@@ -70,13 +70,26 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
         if (action instanceof MainAction.SwipeRight) {
             swipe();
         }
+
+        if (action instanceof MainAction.DrinkClick) {
+            reloadCards();
+        }
+
+        if (action instanceof MainAction.HardcoreClick) {
+            reloadCards();
+        }
     }
 
     private void swipe() {
+        currentCount++;
         if (cardsSize - currentCount < 3) {
-            // TODO get random batch
-            //  swipePlaceHolderView.addView(new CardSwipeView(getCard(), actions));
+            reloadCards();
         }
+    }
+
+    private void reloadCards() {
+        swipePlaceHolder.removeAllViews();
+        getCards();
     }
 
     @Override
@@ -99,6 +112,10 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     @Override
     public void onStart() {
         super.onStart();
+        getCards();
+    }
+
+    private void getCards() {
         cardManager.getCards()
                 .doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(Schedulers.io())
