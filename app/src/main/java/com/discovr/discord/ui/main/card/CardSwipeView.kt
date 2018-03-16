@@ -2,22 +2,20 @@ package com.discovr.discord.ui.main.card
 
 import android.util.Log
 import android.widget.TextView
-
 import com.discovr.discord.R
 import com.discovr.discord.model.Card
-import com.discovr.discord.ui.main.MainAction
+import com.discovr.discord.ui.main.MainEvent
 import com.mindorks.placeholderview.annotations.Layout
 import com.mindorks.placeholderview.annotations.NonReusable
 import com.mindorks.placeholderview.annotations.Resolve
 import com.mindorks.placeholderview.annotations.View
 import com.mindorks.placeholderview.annotations.swipe.SwipeIn
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut
-
-import io.reactivex.subjects.Subject
+import io.reactivex.Observer
 
 @Layout(R.layout.card)
 @NonReusable
-class CardSwipeView(private val card: Card, private val actions: Subject<MainAction>) {
+class CardSwipeView(private val card: Card, private val events: Observer<MainEvent>) {
 
     companion object {
         private const val TAG = "CardSwipeView"
@@ -37,12 +35,12 @@ class CardSwipeView(private val card: Card, private val actions: Subject<MainAct
     @SwipeOut
     private fun swipeLeft() {
         Log.d(TAG, "Swipe left")
-        actions.onNext(MainAction.SwipeLeft())
+        events.onNext(MainEvent.SwipeLeft())
     }
 
     @SwipeIn
     private fun swipeRight() {
         Log.d(TAG, "Swipe right")
-        actions.onNext(MainAction.SwipeRight())
+        events.onNext(MainEvent.SwipeRight())
     }
 }

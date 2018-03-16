@@ -1,22 +1,21 @@
 package com.discovr.discord.ui.main
 
-import android.view.Menu
-import android.view.MenuItem
+import com.discovr.discord.model.Tag
 import io.reactivex.Observable
 
 interface MainContract {
-    interface Activity
+    interface Activity {
+        fun render(model: MainModel)
+    }
 
     interface ActivityPresenter {
-        fun drinkClick(item: MenuItem)
+        fun getValue(tag: Tag): Boolean
 
-        fun hardcoreClick(item: MenuItem)
-
-        fun setUpMenu(menu: Menu)
-
-        fun subscribe(actions: Observable<MainAction>?)
-        fun dispose()
         fun clear()
+
+        fun dispose()
+
+        fun subscribe(events: Observable<MainEvent>)
     }
 
     interface CardFragment

@@ -6,9 +6,9 @@ import android.hardware.SensorManager
 import android.os.Vibrator
 import com.discovr.discord.data.manager.SettingManager
 import com.discovr.discord.injection.util.ActivityScope
-import com.discovr.discord.ui.main.MainAction
 import com.discovr.discord.ui.main.MainActivity
 import com.discovr.discord.ui.main.MainContract
+import com.discovr.discord.ui.main.MainEvent
 import com.discovr.discord.ui.main.MainPresenter
 import com.discovr.discord.ui.main.card.CardFragment
 import com.discovr.discord.ui.main.util.IconHelper
@@ -60,7 +60,7 @@ class MainActivityModuleProvide {
 
     @Provides
     @ActivityScope
-    internal fun provideSubject(): Subject<MainAction> {
+    internal fun provideSubject(): Subject<MainEvent> {
         return PublishSubject.create()
     }
 }

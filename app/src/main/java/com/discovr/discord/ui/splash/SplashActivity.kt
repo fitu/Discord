@@ -23,11 +23,11 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        presenter!!.subscribe(events as Observable<SplashEvent>)
     }
 
     override fun onStart() {
         super.onStart()
+        presenter!!.subscribe(events as Observable<SplashEvent>)
         events!!.onNext(SplashEvent.Start(presenter!!.isFirstTime()))
     }
 

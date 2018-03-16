@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import com.discovr.discord.R;
 import com.discovr.discord.data.manager.CardManager;
 import com.discovr.discord.model.Card;
-import com.discovr.discord.ui.main.MainAction;
 import com.discovr.discord.ui.main.MainContract;
+import com.discovr.discord.ui.main.MainEvent;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -35,7 +35,7 @@ import io.reactivex.subjects.Subject;
 public class CardFragment extends Fragment implements MainContract.CardFragment {
     private static final String TAG = "CardFragment";
 
-    @Inject Subject<MainAction> actions;
+    @Inject Subject<MainEvent> events;
     @Inject CardManager cardManager;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int currentCount = 0;
@@ -57,25 +57,25 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     }
 
     private void subscribe() {
-        actions.doOnSubscribe(compositeDisposable::add)
+        events.doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::actions);
+                .subscribe(this::events);
     }
 
-    private void actions(MainAction action) {
-        if (action instanceof MainAction.SwipeLeft) {
+    private void events(MainEvent event) {
+        if (event instanceof MainEvent.SwipeLeft) {
             swipe();
         }
 
-        if (action instanceof MainAction.SwipeRight) {
+        if (event instanceof MainEvent.SwipeRight) {
             swipe();
         }
 
-        if (action instanceof MainAction.DrinkClick) {
+        if (event instanceof MainEvent.DrinkClick) {
             reloadCards();
         }
 
-        if (action instanceof MainAction.HardcoreClick) {
+        if (event instanceof MainEvent.HardcoreClick) {
             reloadCards();
         }
     }
@@ -126,7 +126,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private void addCardsToView(List<Card> cards) {
         cardsSize = cards.size();
         for (Card card : cards) {
-            swipePlaceHolder.addView(new CardSwipeView(card, actions));
+            swipePlaceHolder.addView(new CardSwipeView(card, events));
         }
     }
 

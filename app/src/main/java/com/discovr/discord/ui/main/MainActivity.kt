@@ -13,19 +13,24 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.DragAndDropPermissions
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.discovr.discord.R
+import com.discovr.discord.model.Tag
 import com.discovr.discord.ui.main.card.CardFragment
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.reactivex.Observable
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.general_toolbar.*
+import org.jetbrains.anko.itemsSequence
 import javax.inject.Inject
 
 // TODO create BaseActivity to inherit common methods
@@ -35,7 +40,7 @@ class MainActivity : AppCompatActivity(),
 
     var presenter: MainContract.ActivityPresenter? = null @Inject set
     var cardFragment: CardFragment? = null @Inject set
-    var actions: Subject<MainAction>? = null @Inject set
+    var events: Subject<MainEvent>? = null @Inject set
 
     var sensorManager: SensorManager? = null @Inject set
     var accelerometer: Sensor? = null @Inject set
@@ -54,8 +59,10 @@ class MainActivity : AppCompatActivity(),
     @OnClick(R.id.tvDice, R.id.fab)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.tvDice -> {} // TODO dice not here
-            R.id.fab -> {}
+            R.id.tvDice -> {
+            } // TODO dice not here
+            R.id.fab -> {
+            }
         }
     }
 
@@ -66,7 +73,6 @@ class MainActivity : AppCompatActivity(),
         ButterKnife.bind(this)
         setUpBar()
         setUpDrawer()
-        presenter!!.subscribe(actions)
         addFragment(cardFragment, R.id.frgContainer)
     }
 
@@ -85,7 +91,37 @@ class MainActivity : AppCompatActivity(),
 
     override fun onStart() {
         super.onStart()
+        presenter!!.subscribe(events as Observable<MainEvent>)
         sensorManager!!.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)
+    }
+
+    override fun render(model: MainModel) {
+        if (model is MainModel.Menu) {
+            model.menuItem.icon = model.newIcon
+            return
+        }
+
+        if (model is MainModel.DrinkClick) {
+            model.menuItem.icon = model.newIcon
+            return
+        }
+
+        if (model is MainModel.HardcoreClick) {
+            model.menuItem.icon = model.newIcon
+            return
+        }
+
+        if (model is MainModel.Error) {
+            renderError(model)
+            return
+        }
+
+        throw IllegalArgumentException("Don't know how to render model $model")
+    }
+
+    private fun renderError(model: MainModel.Error) {
+        Log.e(TAG, model.error.message)
+        finish()
     }
 
     override fun onStop() {
@@ -104,9 +140,12 @@ class MainActivity : AppCompatActivity(),
         item.isChecked = true
 
         when (item.itemId) {
-            R.id.menu_my_cards -> {}
-            R.id.menu_rules -> {}
-            R.id.menu_settings -> {}
+            R.id.menu_my_cards -> {
+            }
+            R.id.menu_rules -> {
+            }
+            R.id.menu_settings -> {
+            }
         }
 
         drawerLayout!!.closeDrawers()
@@ -125,14 +164,32 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        presenter!!.setUpMenu(menu)
+        for (item in menu.itemsSequence()) {
+            when (item.itemId) {
+                R.id.actionDrink -> events!!.onNext(MainEvent.MenuEvent(
+                        item,
+                        presenter!!.getValue(Tag.DRINK),
+                        android.R.color.holo_green_light))
+                R.id.actionHardcore -> events!!.onNext(MainEvent.MenuEvent(
+                        item,
+                        presenter!!.getValue(Tag.HARDCORE),
+                        android.R.color.holo_red_light))
+            }
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.actionDrink -> actions!!.onNext(MainAction.DrinkClick(item))
-            R.id.actionHardcore -> actions!!.onNext(MainAction.HardcoreClick(item))
+            R.id.actionDrink -> events!!.onNext(MainEvent.DrinkClick(
+                    item,
+                    presenter!!.getValue(Tag.DRINK),
+                    android.R.color.holo_green_light,
+                    Tag.DRINK))
+            R.id.actionHardcore -> events!!.onNext(MainEvent.HardcoreClick(
+                    item, presenter!!.getValue(Tag.HARDCORE),
+                    android.R.color.holo_red_light,
+                    Tag.HARDCORE))
         }
         return drawerToggle!!.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
     }

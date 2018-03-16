@@ -1,7 +1,5 @@
 package com.discovr.discord.ui.main
 
-import android.view.Menu
-import android.view.MenuItem
 import com.discovr.discord.data.manager.SettingManager
 import com.discovr.discord.model.Tag
 import com.discovr.discord.ui.main.util.IconHelper
@@ -17,31 +15,47 @@ class MainPresenter
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun subscribe(actions: Observable<MainAction>?) {
-        actions!!.doOnSubscribe({ compositeDisposable.add(it) })
+    override fun getValue(tag: Tag): Boolean {
+        return settingManager.getValue(tag)
+    }
+
+    override fun subscribe(events: Observable<MainEvent>) {
+        events.doOnSubscribe({ compositeDisposable.add(it) })
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe({ this.actions(it) })
+                .filter({ it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick})
+                .flatMap<MainModel>({ this.handleEvent(it) })
+                .subscribe({ view.render(it) })
     }
 
-    private fun actions(action: MainAction) {
-        when (action) {
-            is MainAction.DrinkClick -> drinkClick(action.item)
-            is MainAction.HardcoreClick -> hardcoreClick(action.item)
+    private fun handleEvent(event: MainEvent): Observable<MainModel> {
+        // TODO there is a bug when click, there is a delay in the cards
+        if (event is MainEvent.DrinkClick) {
+            return drinkEvent(event)
         }
+
+        if (event is MainEvent.HardcoreClick) {
+            return hardcoreEvent(event)
+        }
+
+        return menuEvent(event as MainEvent.MenuEvent)
     }
 
-    override fun setUpMenu(menu: Menu) {
-        iconHelper.setUpMenu(menu)
+    private fun menuEvent(event: MainEvent.MenuEvent): Observable<MainModel> {
+        return Observable.just(iconHelper.setIconColor(event))
+                .map { MainModel.Menu(event.menuItem, it) as MainModel }
+                .onErrorReturn({ MainModel.Error(it) })
     }
 
-    override fun drinkClick(item: MenuItem) {
-        val isDrinkSet = settingManager.getValue(Tag.DRINK)
-        iconHelper.drinkClick(item, isDrinkSet)
+    private fun drinkEvent(event: MainEvent.DrinkClick): Observable<MainModel> {
+        return Observable.just(iconHelper.drinkClick(event))
+                .map { MainModel.DrinkClick(event.item, it) as MainModel }
+                .onErrorReturn({ MainModel.Error(it) })
     }
 
-    override fun hardcoreClick(item: MenuItem) {
-        val isHardcodeSet = settingManager.getValue(Tag.HARDCORE)
-        iconHelper.hardcoreClick(item, isHardcodeSet)
+    private fun hardcoreEvent(event: MainEvent.HardcoreClick): Observable<MainModel> {
+        return Observable.just(iconHelper.hardcoreClick(event))
+                .map { MainModel.HardcoreClick(event.item, it) as MainModel }
+                .onErrorReturn({ MainModel.Error(it) })
     }
 
     override fun clear() {

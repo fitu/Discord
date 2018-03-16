@@ -8,7 +8,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-// TODO inject events
 class SplashPresenter
 @Inject constructor(private val view: SplashContract.View,
                     private val cardManager: CardManager,
@@ -23,17 +22,14 @@ class SplashPresenter
     override fun subscribe(events: Observable<SplashEvent>) {
         events.doOnSubscribe({ compositeDisposable.add(it) })
                 .observeOn(Schedulers.io())
+                .filter( { it is SplashEvent.Start })
                 .flatMap<SplashModel>({ this.handleEvent(it) })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view.render(it) })
     }
 
     private fun handleEvent(event: SplashEvent): Observable<SplashModel> {
-        if (event is SplashEvent.Start) {
-            return startEvent(event)
-        }
-
-        return Observable.just(SplashModel.Error(Throwable("Can't handle event")))
+        return startEvent(event as SplashEvent.Start)
     }
 
     private fun startEvent(startEvent: SplashEvent.Start): Observable<SplashModel> {
