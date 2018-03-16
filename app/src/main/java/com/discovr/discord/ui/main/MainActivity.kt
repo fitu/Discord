@@ -2,7 +2,6 @@ package com.discovr.discord.ui.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -24,26 +23,24 @@ import com.discovr.discord.ui.main.card.CardFragment
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.general_toolbar.*
 import javax.inject.Inject
 
+// TODO create BaseActivity to inherit common methods
 class MainActivity : AppCompatActivity(),
         MainContract.Activity, NavigationView.OnNavigationItemSelectedListener, SensorEventListener,
         HasSupportFragmentInjector {
 
-    var injector: DispatchingAndroidInjector<Fragment>? = null @Inject set
     var presenter: MainContract.ActivityPresenter? = null @Inject set
     var cardFragment: CardFragment? = null @Inject set
     var actions: Subject<MainAction>? = null @Inject set
+
     var sensorManager: SensorManager? = null @Inject set
     var accelerometer: Sensor? = null @Inject set
-
     private var drawerToggle: ActionBarDrawerToggle? = null
-    private val compositeDisposable = CompositeDisposable()
+    var injector: DispatchingAndroidInjector<Fragment>? = null @Inject set
 
     companion object {
         private const val TAG = "MainActivity"
@@ -69,7 +66,7 @@ class MainActivity : AppCompatActivity(),
         ButterKnife.bind(this)
         setUpBar()
         setUpDrawer()
-        subscribe()
+        presenter!!.subscribe(actions)
         addFragment(cardFragment, R.id.frgContainer)
     }
 
@@ -86,19 +83,6 @@ class MainActivity : AppCompatActivity(),
         navigationView!!.setNavigationItemSelectedListener(this)
     }
 
-    private fun subscribe() {
-        actions!!.doOnSubscribe({ compositeDisposable.add(it) })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe({ this.actions(it) })
-    }
-
-    private fun actions(action: MainAction) {
-        when (action) {
-            is MainAction.DrinkClick -> presenter!!.drinkClick(action.item)
-            is MainAction.HardcoreClick -> presenter!!.hardcoreClick(action.item)
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         sensorManager!!.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)
@@ -106,13 +90,13 @@ class MainActivity : AppCompatActivity(),
 
     override fun onStop() {
         super.onStop()
-        compositeDisposable.clear()
+        presenter!!.clear()
         sensorManager!!.unregisterListener(this)
     }
 
     public override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        presenter!!.dispose()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

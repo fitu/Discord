@@ -1,6 +1,5 @@
 package com.discovr.discord.data.manager
 
-import android.util.Log
 import com.discovr.discord.data.db.CardDao
 import com.discovr.discord.data.db.DiscordDb
 import com.discovr.discord.data.parser.CardYaml
@@ -14,10 +13,9 @@ import java.util.*
 import javax.inject.Inject
 
 class CardManager
-@Inject
-constructor(private val db: DiscordDb,
-            private val settingManager: SettingManager,
-            private val yamlParser: CardYamlParser) {
+@Inject constructor(db: DiscordDb,
+                    private val settingManager: SettingManager,
+                    private val yamlParser: CardYamlParser) {
     private val cardDao: CardDao = db.cardDao()
 
     fun getCards(): Single<List<Card>> {

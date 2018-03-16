@@ -3,21 +3,17 @@ package com.discovr.discord.ui.splash
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-
 import com.discovr.discord.R
-import com.discovr.discord.data.manager.SettingManager
 import com.discovr.discord.ui.main.MainActivity
-
-import javax.inject.Inject
-
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
+import io.reactivex.subjects.Subject
+import javax.inject.Inject
 
-class SplashActivity : AppCompatActivity(),
-        SplashContract.View {
+class SplashActivity : AppCompatActivity(), SplashContract.View {
 
     var presenter: SplashContract.Presenter? = null @Inject set
-    var settingManager: SettingManager? = null @Inject set
+    var events: Subject<SplashEvent>? = null @Inject set
 
     companion object {
         private const val TAG = "SplashActivity"
@@ -27,15 +23,12 @@ class SplashActivity : AppCompatActivity(),
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        presenter!!.subscribe(events as Observable<SplashEvent>)
     }
 
     override fun onStart() {
         super.onStart()
-        presenter!!.start()
-    }
-
-    override fun startEvent(): Observable<SplashEvent.Start> {
-        return Observable.just(SplashEvent.Start(settingManager!!.isFirstTime))
+        events!!.onNext(SplashEvent.Start(presenter!!.isFirstTime()))
     }
 
     override fun render(model: SplashModel) {
