@@ -4,13 +4,10 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import android.view.Menu
 import android.view.MenuItem
-import com.discovr.discord.R
-import com.discovr.discord.data.manager.SettingManager
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.model.Tag
 import com.discovr.discord.ui.main.MainEvent
-import org.jetbrains.anko.itemsSequence
 import javax.inject.Inject
 
 class IconHelper

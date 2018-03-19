@@ -1,4 +1,4 @@
-package com.discovr.discord.data.manager
+package com.discovr.discord.data.manager.setting
 
 import android.content.SharedPreferences
 
@@ -19,11 +19,11 @@ constructor(private val sharedPreferences: SharedPreferences) {
         const val KEY_FIRST_TIME = "KEY_FIRST_TIME"
     }
 
-    fun notFirstTime(isFirstTime: Boolean): Boolean {
+    fun handleAction(action: SettingAction): Observable<SettingResult> {
         sharedPreferences.edit()
                 .putBoolean(KEY_FIRST_TIME, !isFirstTime)
                 .apply()
-        return true
+        return Observable.just(SettingResult.FirstTime())
     }
 
     fun getValue(tag: Tag): Boolean {

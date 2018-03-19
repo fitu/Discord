@@ -1,7 +1,7 @@
 package com.discovr.discord.injection.splash
 
-import com.discovr.discord.data.manager.CardManager
-import com.discovr.discord.data.manager.SettingManager
+import com.discovr.discord.data.manager.card.CardManager
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.splash.SplashContract
 import com.discovr.discord.ui.splash.SplashEvent

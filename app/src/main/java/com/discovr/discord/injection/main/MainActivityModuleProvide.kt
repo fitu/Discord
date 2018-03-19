@@ -4,7 +4,7 @@ import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Vibrator
-import com.discovr.discord.data.manager.SettingManager
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.main.MainActivity
 import com.discovr.discord.ui.main.MainContract

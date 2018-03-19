@@ -1,7 +1,8 @@
-package com.discovr.discord.data.manager
+package com.discovr.discord.data.manager.card
 
 import com.discovr.discord.data.db.CardDao
 import com.discovr.discord.data.db.DiscordDb
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.data.parser.CardYaml
 import com.discovr.discord.data.parser.CardYamlParser
 import com.discovr.discord.data.parser.ParserException
@@ -24,15 +25,21 @@ class CardManager
         return cardDao.findAllWithFlags(isDrinkSet, isHardcoreSet)
     }
 
+    fun handleAction(action: CardAction): Observable<CardResult> {
+        return loadCards()
+    }
+
     @Throws(ParserException::class)
-    fun loadCards(): Observable<Boolean> {
+    private fun loadCards(): Observable<CardResult> {
         val cards = CardYaml.toCards(yamlParser.loadCards())
         val repeatedCards = getCardByQuantity(cards)
-        return saveCardsToDb(repeatedCards)
+        return if (saveCardsToDb(repeatedCards))
+            Observable.just(CardResult.CardsDone())
+        else
+            Observable.just(CardResult.CardsFail())
     }
 
     private fun getCardByQuantity(cards: List<Card>): List<Card> {
-        // TODO is ok here? or should do it when retrieving cards
         val repeatedCards = ArrayList<Card>()
         for (card in cards) {
             for (quantity in 1..card.quantity!!)
@@ -41,9 +48,7 @@ class CardManager
         return repeatedCards
     }
 
-    private fun saveCardsToDb(cards: List<Card>): Observable<Boolean> {
-        return if (!cardDao.insertAll(cards).isEmpty()) {
-            Observable.just(true)
-        } else Observable.just(false)
+    private fun saveCardsToDb(cards: List<Card>): Boolean {
+        return !cardDao.insertAll(cards).isEmpty()
     }
 }

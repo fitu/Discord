@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 
 import com.discovr.discord.data.db.DiscordDb
-import com.discovr.discord.data.manager.CardManager
+import com.discovr.discord.data.manager.card.CardManager
 import com.discovr.discord.data.parser.CardYamlParser
-import com.discovr.discord.data.manager.SettingManager
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 

@@ -1,6 +1,6 @@
 package com.discovr.discord.ui.main
 
-import com.discovr.discord.data.manager.SettingManager
+import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.model.Tag
 import com.discovr.discord.ui.main.util.IconHelper
 import io.reactivex.Observable

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.discovr.discord.R;
-import com.discovr.discord.data.manager.CardManager;
+import com.discovr.discord.data.manager.card.CardManager;
 import com.discovr.discord.model.Card;
 import com.discovr.discord.ui.main.MainContract;
 import com.discovr.discord.ui.main.MainEvent;
