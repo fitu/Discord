@@ -4,6 +4,7 @@ import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Vibrator
+import com.discovr.discord.data.manager.card.CardManager
 import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.main.MainActivity
@@ -23,9 +24,10 @@ class MainActivityModuleProvide {
     @Provides
     @ActivityScope
     internal fun provideActivityPresenter(activity: MainContract.Activity,
+                                          cardManager: CardManager,
                                           settingManager: SettingManager,
                                           iconHelper: IconHelper): MainContract.ActivityPresenter {
-        return MainPresenter(activity, settingManager, iconHelper)
+        return MainPresenter(activity, cardManager, settingManager, iconHelper)
     }
 
     @Provides

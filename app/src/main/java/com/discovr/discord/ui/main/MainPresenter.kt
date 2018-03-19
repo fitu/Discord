@@ -1,5 +1,6 @@
 package com.discovr.discord.ui.main
 
+import com.discovr.discord.data.manager.card.CardManager
 import com.discovr.discord.data.manager.setting.SettingManager
 import com.discovr.discord.model.Tag
 import com.discovr.discord.ui.main.util.IconHelper
@@ -10,8 +11,13 @@ import javax.inject.Inject
 
 class MainPresenter
 @Inject constructor(private val view: MainContract.Activity,
+                    private val cardManager: CardManager,
                     private val settingManager: SettingManager,
                     private val iconHelper: IconHelper) : MainContract.ActivityPresenter {
+
+    init {
+     //   cardManager.subscribe()
+    }
 
     private val compositeDisposable = CompositeDisposable()
 

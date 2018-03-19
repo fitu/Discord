@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +29,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.Subject;
+import timber.log.Timber;
 
 // This class has to be Java because swipePlaceHolder is not compatible
 public class CardFragment extends Fragment implements MainContract.CardFragment {
-    private static final String TAG = "CardFragment";
-
     @Inject Subject<MainEvent> events;
     @Inject CardManager cardManager;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -42,7 +40,8 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     private int cardsSize = 0;
     private Unbinder unbinder;
 
-    @BindView(R.id.swipePlaceHolder) SwipePlaceHolderView swipePlaceHolder;
+    @BindView(R.id.swipePlaceHolder)
+    SwipePlaceHolderView swipePlaceHolder;
 
     @Override
     public void onAttach(Context context) {
@@ -120,7 +119,7 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
                 .doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::addCardsToView, this::error);
+                .subscribe(this::addCardsToView, Timber::e);
     }
 
     private void addCardsToView(List<Card> cards) {
@@ -128,10 +127,6 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
         for (Card card : cards) {
             swipePlaceHolder.addView(new CardSwipeView(card, events));
         }
-    }
-
-    private void error(Throwable throwable) {
-        Log.e(TAG, throwable.getMessage());
     }
 
     @Override

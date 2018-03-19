@@ -2,22 +2,17 @@ package com.discovr.discord.ui.splash
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.discovr.discord.R
 import com.discovr.discord.ui.main.MainActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.Subject
+import timber.log.Timber
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity(), SplashContract.View {
-
     var presenter: SplashContract.Presenter? = null @Inject set
     var events: Subject<SplashEvent>? = null @Inject set
-
-    companion object {
-        private const val TAG = "SplashActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -56,7 +51,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     private fun renderError(model: SplashModel.Error) {
-        Log.e(TAG, model.error.message)
+        Timber.e(model.error.message)
         finish()
     }
 

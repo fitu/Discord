@@ -8,13 +8,17 @@ import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
 import com.discovr.discord.injection.app.AppComponent
 import com.discovr.discord.injection.app.DaggerAppComponent
+import com.discovr.discord.util.ReleaseTree
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 
-class DiscordApplication : Application(),
-        HasActivityInjector {
+
+
+class DiscordApplication : Application(), HasActivityInjector {
 
     var injector: DispatchingAndroidInjector<Activity>? = null @Inject set
 
@@ -43,10 +47,14 @@ class DiscordApplication : Application(),
 
         if (BuildConfig.DEBUG) {
             setDebugConfig()
+        } else {
+            setReleaseConfig()
         }
     }
 
     private fun setDebugConfig() {
+        Timber.plant(DebugTree())
+
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
@@ -55,6 +63,10 @@ class DiscordApplication : Application(),
                 .detectAll()
                 .penaltyLog()
                 .build())
+    }
+
+    private fun setReleaseConfig() {
+        Timber.plant(ReleaseTree())
     }
 
     override fun activityInjector(): DispatchingAndroidInjector<Activity>? {

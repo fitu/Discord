@@ -1,16 +1,15 @@
 package com.discovr.discord.data.manager.setting
 
 import android.content.SharedPreferences
-
 import com.discovr.discord.model.Tag
-
-import javax.inject.Inject
-
 import io.reactivex.Observable
+import io.reactivex.subjects.Subject
+import javax.inject.Inject
 
 class SettingManager
 @Inject
-constructor(private val sharedPreferences: SharedPreferences) {
+constructor(private val results: Subject<SettingResult>,
+            private val sharedPreferences: SharedPreferences) {
 
     val isFirstTime: Boolean
         get() = sharedPreferences.getBoolean(KEY_FIRST_TIME, true)

@@ -10,14 +10,16 @@ import com.discovr.discord.model.Card
 import com.discovr.discord.model.Tag
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.Subject
 import java.util.*
 import javax.inject.Inject
 
 class CardManager
-@Inject constructor(db: DiscordDb,
+@Inject constructor(private val results: Subject<CardResult>,
+                    private val db: DiscordDb,
                     private val settingManager: SettingManager,
                     private val yamlParser: CardYamlParser) {
-    private val cardDao: CardDao = db.cardDao()
+    private val cardDao : CardDao = db.cardDao()
 
     fun getCards(): Single<List<Card>> {
         val isDrinkSet = if (settingManager.getValue(Tag.DRINK)) 1 else 0

@@ -13,8 +13,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.DragAndDropPermissions
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,6 +29,7 @@ import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.general_toolbar.*
 import org.jetbrains.anko.itemsSequence
+import timber.log.Timber
 import javax.inject.Inject
 
 // TODO create BaseActivity to inherit common methods
@@ -48,8 +47,6 @@ class MainActivity : AppCompatActivity(),
     var injector: DispatchingAndroidInjector<Fragment>? = null @Inject set
 
     companion object {
-        private const val TAG = "MainActivity"
-
         fun start(context: Context) {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
@@ -120,7 +117,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun renderError(model: MainModel.Error) {
-        Log.e(TAG, model.error.message)
+        Timber.e(model.error.message)
         finish()
     }
 
