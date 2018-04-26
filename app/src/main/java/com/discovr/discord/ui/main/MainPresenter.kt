@@ -16,7 +16,8 @@ class MainPresenter
                     private val iconHelper: IconHelper) : MainContract.ActivityPresenter {
 
     init {
-     //   cardManager.subscribe()
+        // TODO why commented?
+        //   cardManager.subscribe()
     }
 
     private val compositeDisposable = CompositeDisposable()
@@ -28,13 +29,12 @@ class MainPresenter
     override fun subscribe(events: Observable<MainEvent>) {
         events.doOnSubscribe({ compositeDisposable.add(it) })
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .filter({ it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick})
+                .filter({ it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick })
                 .flatMap<MainModel>({ this.handleEvent(it) })
                 .subscribe({ view.render(it) })
     }
 
     private fun handleEvent(event: MainEvent): Observable<MainModel> {
-        // TODO there is a bug when click, there is a delay in the cards
         if (event is MainEvent.DrinkClick) {
             return drinkEvent(event)
         }
@@ -46,12 +46,6 @@ class MainPresenter
         return menuEvent(event as MainEvent.MenuEvent)
     }
 
-    private fun menuEvent(event: MainEvent.MenuEvent): Observable<MainModel> {
-        return Observable.just(iconHelper.setIconColor(event))
-                .map { MainModel.Menu(event.menuItem, it) as MainModel }
-                .onErrorReturn({ MainModel.Error(it) })
-    }
-
     private fun drinkEvent(event: MainEvent.DrinkClick): Observable<MainModel> {
         return Observable.just(iconHelper.drinkClick(event))
                 .map { MainModel.DrinkClick(event.item, it) as MainModel }
@@ -61,6 +55,12 @@ class MainPresenter
     private fun hardcoreEvent(event: MainEvent.HardcoreClick): Observable<MainModel> {
         return Observable.just(iconHelper.hardcoreClick(event))
                 .map { MainModel.HardcoreClick(event.item, it) as MainModel }
+                .onErrorReturn({ MainModel.Error(it) })
+    }
+
+    private fun menuEvent(event: MainEvent.MenuEvent): Observable<MainModel> {
+        return Observable.just(iconHelper.setIconColor(event))
+                .map { MainModel.Menu(event.menuItem, it) as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })
     }
 

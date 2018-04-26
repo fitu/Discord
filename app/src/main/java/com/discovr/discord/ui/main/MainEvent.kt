@@ -8,6 +8,8 @@ interface MainEvent {
                     val isSet: Boolean,
                     val colorId: Int) : MainEvent
 
+    class FragmentStart : MainEvent
+
     class SwipeLeft : MainEvent
 
     class SwipeRight : MainEvent

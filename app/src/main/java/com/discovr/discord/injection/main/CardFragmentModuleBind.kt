@@ -11,7 +11,7 @@ import dagger.android.support.FragmentKey
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class CardFragmentModule {
+abstract class CardFragmentModuleBind {
     @Binds
     @IntoMap
     @FragmentKey(CardFragment::class)

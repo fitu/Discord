@@ -7,7 +7,7 @@ import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
 @FragmentScope
-@Subcomponent(modules = arrayOf(CardFragmentModule::class))
+@Subcomponent(modules = arrayOf(CardFragmentModuleBind::class, CardFragmentModuleProvide::class))
 interface CardFragmentComponent : AndroidInjector<CardFragment> {
     @Subcomponent.Builder
     abstract class Builder : AndroidInjector.Builder<CardFragment>()

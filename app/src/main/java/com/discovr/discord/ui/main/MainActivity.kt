@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onStart() {
         super.onStart()
+        // TODO inject this?
         presenter!!.subscribe(events as Observable<MainEvent>)
         sensorManager!!.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)
     }
@@ -161,6 +162,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        // TODO replace this, should be start
         for (item in menu.itemsSequence()) {
             when (item.itemId) {
                 R.id.actionDrink -> events!!.onNext(MainEvent.MenuEvent(

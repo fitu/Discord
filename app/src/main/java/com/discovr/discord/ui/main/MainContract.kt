@@ -18,7 +18,15 @@ interface MainContract {
         fun subscribe(events: Observable<MainEvent>)
     }
 
-    interface CardFragment
+    interface CardFragment {
+        fun render(model: MainModel)
+    }
 
-    interface CardFragmentPresenter
+    interface CardFragmentPresenter {
+        fun clear()
+
+        fun dispose()
+
+        fun subscribe(events: Observable<MainEvent>)
+    }
 }

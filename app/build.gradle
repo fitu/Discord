@@ -61,6 +61,12 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
+    android {
+        lintOptions {
+            disable 'CheckResult'
+        }
+    }
+
     dexOptions {
         preDexLibraries true
         maxProcessCount 8
