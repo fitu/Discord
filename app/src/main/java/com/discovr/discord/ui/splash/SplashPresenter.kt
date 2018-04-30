@@ -14,11 +14,15 @@ import javax.inject.Inject
 
 class SplashPresenter
 @Inject constructor(private val view: SplashContract.View,
-                    private val events: Observable<SplashEvent>,
+                    events: Observable<SplashEvent>,
                     private val cardManager: CardManager,
                     private val settingManager: SettingManager) : SplashContract.Presenter {
 
+    private val compositeDisposable: CompositeDisposable?
+
     init {
+        compositeDisposable = CompositeDisposable()
+
         events.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
                 .flatMap<SplashModel> { this.handleEvents(it) }
@@ -42,8 +46,6 @@ class SplashPresenter
                 .subscribe { view.render(it) }
     }
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
     override fun isFirstTime(): Boolean {
         // TODO not a stream
         return settingManager.isFirstTime
@@ -59,18 +61,17 @@ class SplashPresenter
 
         return settingManager.handleAction(SettingAction.FirstTime())
                 .flatMap { cardManager.handleAction(CardAction.LoadCards()) }
-                .flatMap { this.handleCardResults(it) }
-                .onErrorReturn { SplashModel.Error(it) }
-    }
-
-    private fun handleCardResults(result: CardResult): Observable<SplashModel> {
-        return Observable.just(result)
                 .map {
                     if (it is CardResult.LoadCardsDone)
                         SplashModel.Start()
                     else
                         SplashModel.StartFail("There was a problem loading the cards")
                 }
+                .onErrorReturn { SplashModel.Error(it) }
+    }
+
+    private fun handleCardResults(result: CardResult): Observable<SplashModel> {
+        return Observable.empty()
     }
 
     private fun handleSettingResults(result: SettingResult): Observable<SplashModel> {
@@ -78,10 +79,10 @@ class SplashPresenter
     }
 
     override fun clear() {
-        compositeDisposable.clear()
+        compositeDisposable!!.clear()
     }
 
     override fun dispose() {
-        compositeDisposable.dispose()
+        compositeDisposable!!.dispose()
     }
 }
