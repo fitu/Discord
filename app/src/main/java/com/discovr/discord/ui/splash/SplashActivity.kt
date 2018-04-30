@@ -22,17 +22,11 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter!!.subscribe(events as Observable<SplashEvent>)
         events!!.onNext(SplashEvent.Start(presenter!!.isFirstTime()))
     }
 
     override fun render(model: SplashModel) {
-        if (model is SplashModel.NotFirstTime) {
-            goToMain()
-            return
-        }
-
-        if (model is SplashModel.FirstTime) {
+        if (model is SplashModel.FirstTime || model is SplashModel.NotFirstTime) {
             goToMain()
             return
         }

@@ -1,7 +1,7 @@
 package com.discovr.discord.data.manager.card
 
 interface CardResult {
-    class CardsDone : CardResult
+    class LoadCardsDone : CardResult
 
-    class CardsFail : CardResult
+    class LoadCardsFail : CardResult
 }

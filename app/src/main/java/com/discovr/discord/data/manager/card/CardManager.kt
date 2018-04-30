@@ -19,7 +19,8 @@ class CardManager
                     private val db: DiscordDb,
                     private val settingManager: SettingManager,
                     private val yamlParser: CardYamlParser) {
-    private val cardDao : CardDao = db.cardDao()
+
+    private val cardDao: CardDao = db.cardDao()
 
     fun getCards(): Single<List<Card>> {
         val isDrinkSet = if (settingManager.getValue(Tag.DRINK)) 1 else 0
@@ -36,9 +37,9 @@ class CardManager
         val cards = CardYaml.toCards(yamlParser.loadCards())
         val repeatedCards = getCardByQuantity(cards)
         return if (saveCardsToDb(repeatedCards))
-            Observable.just(CardResult.CardsDone())
+            Observable.just(CardResult.LoadCardsDone())
         else
-            Observable.just(CardResult.CardsFail())
+            Observable.just(CardResult.LoadCardsFail())
     }
 
     private fun getCardByQuantity(cards: List<Card>): List<Card> {

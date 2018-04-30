@@ -11,12 +11,12 @@ class SettingManager
 constructor(private val results: Subject<SettingResult>,
             private val sharedPreferences: SharedPreferences) {
 
-    val isFirstTime: Boolean
-        get() = sharedPreferences.getBoolean(KEY_FIRST_TIME, true)
-
     companion object {
         const val KEY_FIRST_TIME = "KEY_FIRST_TIME"
     }
+
+    val isFirstTime: Boolean
+        get() = sharedPreferences.getBoolean(KEY_FIRST_TIME, true)
 
     fun handleAction(action: SettingAction): Observable<SettingResult> {
         sharedPreferences.edit()

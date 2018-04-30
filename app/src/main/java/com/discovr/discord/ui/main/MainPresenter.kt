@@ -16,7 +16,7 @@ class MainPresenter
                     private val iconHelper: IconHelper) : MainContract.ActivityPresenter {
 
     init {
-        // TODO why commented?
+        // TODO uncomment when the subscription in cardManager is working
         //   cardManager.subscribe()
     }
 

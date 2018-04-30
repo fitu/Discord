@@ -8,6 +8,7 @@ import com.discovr.discord.ui.splash.SplashEvent
 import com.discovr.discord.ui.splash.SplashPresenter
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
@@ -16,9 +17,10 @@ class SplashActivityModuleProvide {
     @Provides
     @ActivityScope
     internal fun providePresenter(activity: SplashContract.View,
+                                  events: Observable<SplashEvent>,
                                   cardManager: CardManager,
                                   settingManager: SettingManager): SplashContract.Presenter {
-        return SplashPresenter(activity, cardManager, settingManager)
+        return SplashPresenter(activity, events, cardManager, settingManager)
     }
 
     @Provides

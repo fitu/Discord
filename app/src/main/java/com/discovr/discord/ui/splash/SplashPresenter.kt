@@ -12,21 +12,22 @@ import javax.inject.Inject
 
 class SplashPresenter
 @Inject constructor(private val view: SplashContract.View,
+                    private val events: Observable<SplashEvent>,
                     private val cardManager: CardManager,
                     private val settingManager: SettingManager) : SplashContract.Presenter {
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
-    override fun isFirstTime(): Boolean {
-        return settingManager.isFirstTime
-    }
-
-    override fun subscribe(events: Observable<SplashEvent>) {
+    init {
         events.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
                 .flatMap<SplashModel> { this.handleEvents(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view.render(it) }
+    }
+
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    override fun isFirstTime(): Boolean {
+        return settingManager.isFirstTime
     }
 
     private fun handleEvents(event: SplashEvent): Observable<SplashModel> {
