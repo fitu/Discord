@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import com.discovr.discord.R
 import com.discovr.discord.ui.main.MainActivity
 import dagger.android.AndroidInjection
-import io.reactivex.Observable
 import io.reactivex.subjects.Subject
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,13 +25,18 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     }
 
     override fun render(model: SplashModel) {
-        if (model is SplashModel.FirstTime || model is SplashModel.NotFirstTime) {
+        if (model is SplashModel.Start) {
             goToMain()
             return
         }
 
+        if (model is SplashModel.StartFail) {
+            logError(model.errorMessage)
+            return
+        }
+
         if (model is SplashModel.Error) {
-            renderError(model)
+            logError(model.error.message)
             return
         }
 
@@ -44,8 +48,8 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         finish()
     }
 
-    private fun renderError(model: SplashModel.Error) {
-        Timber.e(model.error.message)
+    private fun logError(errorMessage: String?) {
+        Timber.e(errorMessage)
         finish()
     }
 

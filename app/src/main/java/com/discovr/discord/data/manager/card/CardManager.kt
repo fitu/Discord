@@ -22,24 +22,29 @@ class CardManager
 
     private val cardDao: CardDao = db.cardDao()
 
+    val resultsObs: Observable<CardResult>
+        get() = results
+
+    fun handleAction(action: CardAction): Observable<CardResult> {
+        return actionLoadCards()
+    }
+
+    @Throws(ParserException::class)
+    private fun actionLoadCards(): Observable<CardResult> {
+        val cards = CardYaml.toCards(yamlParser.loadCards())
+        val repeatedCards = getCardByQuantity(cards)
+        return if (saveCardsToDb(repeatedCards)) {
+            results.onNext(CardResult.LoadCardsDone())
+            Observable.just(CardResult.LoadCardsDone())
+        } else {
+            Observable.just(CardResult.LoadCardsFail())
+        }
+    }
+
     fun getCards(): Single<List<Card>> {
         val isDrinkSet = if (settingManager.getValue(Tag.DRINK)) 1 else 0
         val isHardcoreSet = if (settingManager.getValue(Tag.HARDCORE)) 1 else 0
         return cardDao.findAllWithFlags(isDrinkSet, isHardcoreSet)
-    }
-
-    fun handleAction(action: CardAction): Observable<CardResult> {
-        return loadCards()
-    }
-
-    @Throws(ParserException::class)
-    private fun loadCards(): Observable<CardResult> {
-        val cards = CardYaml.toCards(yamlParser.loadCards())
-        val repeatedCards = getCardByQuantity(cards)
-        return if (saveCardsToDb(repeatedCards))
-            Observable.just(CardResult.LoadCardsDone())
-        else
-            Observable.just(CardResult.LoadCardsFail())
     }
 
     private fun getCardByQuantity(cards: List<Card>): List<Card> {

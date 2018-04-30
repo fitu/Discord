@@ -15,13 +15,22 @@ constructor(private val results: Subject<SettingResult>,
         const val KEY_FIRST_TIME = "KEY_FIRST_TIME"
     }
 
+    val resultsObs: Observable<SettingResult>
+        get() = results
+
     val isFirstTime: Boolean
         get() = sharedPreferences.getBoolean(KEY_FIRST_TIME, true)
 
     fun handleAction(action: SettingAction): Observable<SettingResult> {
+        return actionFirstTime()
+    }
+
+    private fun actionFirstTime(): Observable<SettingResult> {
         sharedPreferences.edit()
                 .putBoolean(KEY_FIRST_TIME, !isFirstTime)
                 .apply()
+
+        results.onNext(SettingResult.FirstTime())
         return Observable.just(SettingResult.FirstTime())
     }
 

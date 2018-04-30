@@ -27,11 +27,11 @@ class MainPresenter
     }
 
     override fun subscribe(events: Observable<MainEvent>) {
-        events.doOnSubscribe({ compositeDisposable.add(it) })
+        events.doOnSubscribe { compositeDisposable.add(it) }
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .filter({ it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick })
-                .flatMap<MainModel>({ this.handleEvent(it) })
-                .subscribe({ view.render(it) })
+                .filter { it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick }
+                .flatMap<MainModel> { this.handleEvent(it) }
+                .subscribe { view.render(it) }
     }
 
     private fun handleEvent(event: MainEvent): Observable<MainModel> {
