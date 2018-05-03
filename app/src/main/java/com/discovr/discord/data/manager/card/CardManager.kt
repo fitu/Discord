@@ -26,18 +26,18 @@ class CardManager
         get() = results
 
     fun handleAction(action: CardAction): Observable<CardResult> {
-        return actionLoadCards()
+        return actionLoadCards(action as CardAction.LoadCards)
     }
 
     @Throws(ParserException::class)
-    private fun actionLoadCards(): Observable<CardResult> {
+    private fun actionLoadCards(action: CardAction.LoadCards): Observable<CardResult> {
         val cards = CardYaml.toCards(yamlParser.loadCards())
         val repeatedCards = getCardByQuantity(cards)
         return if (saveCardsToDb(repeatedCards)) {
-            results.onNext(CardResult.LoadCardsDone())
-            Observable.just(CardResult.LoadCardsDone())
+            results.onNext(CardResult.LoadCardsDone(action.id))
+            Observable.just(CardResult.LoadCardsDone(action.id))
         } else {
-            Observable.just(CardResult.LoadCardsFail())
+            Observable.just(CardResult.LoadCardsFail(action.id))
         }
     }
 

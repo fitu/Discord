@@ -1,7 +1,9 @@
 package com.discovr.discord.data.manager.card
 
 interface CardResult {
-    class LoadCardsDone : CardResult
+    val id: String
 
-    class LoadCardsFail : CardResult
+    class LoadCardsDone internal constructor(override val id: String) : CardResult
+
+    class LoadCardsFail internal constructor(override val id: String) : CardResult
 }

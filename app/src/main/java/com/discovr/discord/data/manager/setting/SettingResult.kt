@@ -1,5 +1,7 @@
 package com.discovr.discord.data.manager.setting
 
 interface SettingResult {
-    class FirstTime : SettingResult
+    val id: String
+
+    class FirstTime internal constructor(override val id: String) : SettingResult
 }

@@ -1,5 +1,7 @@
 package com.discovr.discord.data.manager.card
 
 interface CardAction {
-    class LoadCards : CardAction
+    val id: String
+
+    class LoadCards internal constructor(override val id: String) : CardAction
 }

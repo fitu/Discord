@@ -18,6 +18,11 @@ class SplashPresenter
                     private val cardManager: CardManager,
                     private val settingManager: SettingManager) : SplashContract.Presenter {
 
+    companion object {
+        // TODO check what's happen when obfuscate it
+        val TAG: String = SplashPresenter::class.java.simpleName
+    }
+
     private val compositeDisposable: CompositeDisposable?
 
     init {
@@ -31,7 +36,7 @@ class SplashPresenter
 
         settingManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
-                // TODO check filters
+                .filter { it.id != TAG }
                 .filter { it is SettingResult.FirstTime }
                 .flatMap<SplashModel> { this.handleSettingResults(it) }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -39,7 +44,7 @@ class SplashPresenter
 
         cardManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
-                // TODO check filters
+                .filter { it.id != TAG }
                 .filter { it is CardResult.LoadCardsDone || it is CardResult.LoadCardsFail }
                 .flatMap<SplashModel> { this.handleCardResults(it) }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -59,8 +64,8 @@ class SplashPresenter
         if (!startEvent.isFirstTime)
             return Observable.just(SplashModel.Start())
 
-        return settingManager.handleAction(SettingAction.FirstTime())
-                .flatMap { cardManager.handleAction(CardAction.LoadCards()) }
+        return settingManager.handleAction(SettingAction.FirstTime(TAG))
+                .flatMap { cardManager.handleAction(CardAction.LoadCards(TAG)) }
                 .map {
                     if (it is CardResult.LoadCardsDone)
                         SplashModel.Start()
