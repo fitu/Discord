@@ -10,6 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+// TODO create BasePresenter to inherit common methods
 class MainPresenter
 @Inject constructor(private val view: MainContract.Activity,
                     events: Observable<MainEvent>,
@@ -28,6 +29,7 @@ class MainPresenter
     init {
         compositeDisposable = CompositeDisposable()
 
+        // TODO add filters
         events.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
                 .flatMap<MainModel> { this.handleEvents(it) }
@@ -53,12 +55,14 @@ class MainPresenter
     }
 
     private fun drinkEvent(event: MainEvent.DrinkClick): Observable<MainModel> {
+        // TODO notify with cardManager and settingManager
         return Observable.just(iconHelper.drinkClick(event))
                 .map { MainModel.DrinkClick() as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })
     }
 
     private fun hardcoreEvent(event: MainEvent.HardcoreClick): Observable<MainModel> {
+        // TODO notify with cardManager and settingManager
         return Observable.just(iconHelper.hardcoreClick(event))
                 .map { MainModel.HardcoreClick() as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })

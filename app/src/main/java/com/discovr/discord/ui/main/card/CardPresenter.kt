@@ -8,6 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
+// TODO create BasePresenter to inherit common methods
 class CardPresenter
 @Inject constructor(private val view: MainContract.CardFragment) : MainContract.CardFragmentPresenter {
 

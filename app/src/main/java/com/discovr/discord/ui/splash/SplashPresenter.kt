@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+// TODO create BasePresenter to inherit common methods
 class SplashPresenter
 @Inject constructor(private val view: SplashContract.View,
                     events: Observable<SplashEvent>,

@@ -9,6 +9,7 @@ import io.reactivex.subjects.Subject
 import timber.log.Timber
 import javax.inject.Inject
 
+// TODO create BaseActivity to inherit common methods
 class SplashActivity : AppCompatActivity(), SplashContract.View {
     var presenter: SplashContract.Presenter? = null @Inject set
     var events: Subject<SplashEvent>? = null @Inject set

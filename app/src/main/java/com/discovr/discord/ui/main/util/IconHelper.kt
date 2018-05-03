@@ -46,6 +46,7 @@ class IconHelper
     }
 
     private fun changeIcon(item: MenuItem, isSet: Boolean, colorId: Int, tag: Tag) : Drawable {
+        // TODO remove setting manager from here
         settingManager.setValue(tag, !isSet)
 
         val newIcon = item.icon

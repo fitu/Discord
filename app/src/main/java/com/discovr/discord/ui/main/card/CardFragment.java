@@ -31,6 +31,7 @@ import dagger.android.support.AndroidSupportInjection;
 import io.reactivex.subjects.Subject;
 import timber.log.Timber;
 
+// TODO create BaseFragment to inherit common methods
 // This class has to be Java because swipePlaceHolder is not compatible
 public class CardFragment extends Fragment implements MainContract.CardFragment {
     @Inject
