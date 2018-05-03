@@ -4,12 +4,15 @@ import android.app.Activity
 import com.discovr.discord.injection.util.ActivityScope
 import com.discovr.discord.ui.main.MainActivity
 import com.discovr.discord.ui.main.MainContract
+import com.discovr.discord.ui.main.MainEvent
 import com.discovr.discord.ui.main.card.CardFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ActivityKey
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
+import io.reactivex.Observable
+import io.reactivex.subjects.Subject
 
 @Module(subcomponents = [CardFragmentComponent::class])
 abstract class MainActivityModuleBind {
@@ -26,4 +29,8 @@ abstract class MainActivityModuleBind {
     @Binds
     @ActivityScope
     internal abstract fun bindFragment(fragment: CardFragment): MainContract.CardFragment
+
+    @Binds
+    @ActivityScope
+    internal abstract fun provideObservable(subject: Subject<MainEvent>): Observable<MainEvent>
 }

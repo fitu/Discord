@@ -15,6 +15,7 @@ import com.discovr.discord.ui.main.card.CardFragment
 import com.discovr.discord.ui.main.util.IconHelper
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
@@ -24,10 +25,11 @@ class MainActivityModuleProvide {
     @Provides
     @ActivityScope
     internal fun provideActivityPresenter(activity: MainContract.Activity,
+                                          events: Observable<MainEvent>,
                                           cardManager: CardManager,
                                           settingManager: SettingManager,
                                           iconHelper: IconHelper): MainContract.ActivityPresenter {
-        return MainPresenter(activity, cardManager, settingManager, iconHelper)
+        return MainPresenter(activity, events, cardManager, settingManager, iconHelper)
     }
 
     @Provides

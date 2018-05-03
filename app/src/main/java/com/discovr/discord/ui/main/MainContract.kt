@@ -14,8 +14,6 @@ interface MainContract {
         fun clear()
 
         fun dispose()
-
-        fun subscribe(events: Observable<MainEvent>)
     }
 
     interface CardFragment {

@@ -4,9 +4,9 @@ import android.view.MenuItem
 import com.discovr.discord.model.Tag
 
 interface MainEvent {
-    class MenuEvent(val menuItem: MenuItem,
-                    val isSet: Boolean,
-                    val colorId: Int) : MainEvent
+    class MenuEvent(val menuItems: Sequence<MenuItem>,
+                    val areSets: HashMap<Tag, Boolean>,
+                    val colorIds: HashMap<Tag, Int>) : MainEvent
 
     class FragmentStart : MainEvent
 

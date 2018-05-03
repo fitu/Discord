@@ -24,7 +24,6 @@ import com.discovr.discord.ui.main.card.CardFragment
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import io.reactivex.Observable
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.general_toolbar.*
@@ -38,8 +37,8 @@ class MainActivity : AppCompatActivity(),
         HasSupportFragmentInjector {
 
     var presenter: MainContract.ActivityPresenter? = null @Inject set
-    var cardFragment: CardFragment? = null @Inject set
     var events: Subject<MainEvent>? = null @Inject set
+    var cardFragment: CardFragment? = null @Inject set
 
     var sensorManager: SensorManager? = null @Inject set
     var accelerometer: Sensor? = null @Inject set
@@ -88,24 +87,19 @@ class MainActivity : AppCompatActivity(),
 
     override fun onStart() {
         super.onStart()
-        // TODO inject this?
-        presenter!!.subscribe(events as Observable<MainEvent>)
         sensorManager!!.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)
     }
 
     override fun render(model: MainModel) {
-        if (model is MainModel.Menu) {
-            model.menuItem.icon = model.newIcon
+        if (model is MainModel.MenuDone) {
             return
         }
 
         if (model is MainModel.DrinkClick) {
-            model.menuItem.icon = model.newIcon
             return
         }
 
         if (model is MainModel.HardcoreClick) {
-            model.menuItem.icon = model.newIcon
             return
         }
 
@@ -162,19 +156,12 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        // TODO replace this, should be start
-        for (item in menu.itemsSequence()) {
-            when (item.itemId) {
-                R.id.actionDrink -> events!!.onNext(MainEvent.MenuEvent(
-                        item,
-                        presenter!!.getValue(Tag.DRINK),
-                        android.R.color.holo_green_light))
-                R.id.actionHardcore -> events!!.onNext(MainEvent.MenuEvent(
-                        item,
-                        presenter!!.getValue(Tag.HARDCORE),
-                        android.R.color.holo_red_light))
-            }
-        }
+        events!!.onNext(MainEvent.MenuEvent(
+                menu.itemsSequence(),
+                hashMapOf(Tag.DRINK to presenter!!.getValue(Tag.DRINK),
+                        Tag.HARDCORE to presenter!!.getValue(Tag.HARDCORE)),
+                hashMapOf(Tag.DRINK to android.R.color.holo_green_light,
+                        Tag.HARDCORE to android.R.color.holo_red_light)))
         return true
     }
 

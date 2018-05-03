@@ -7,34 +7,40 @@ import com.discovr.discord.ui.main.util.IconHelper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainPresenter
 @Inject constructor(private val view: MainContract.Activity,
+                    events: Observable<MainEvent>,
+                    // TODO not used
                     private val cardManager: CardManager,
                     private val settingManager: SettingManager,
                     private val iconHelper: IconHelper) : MainContract.ActivityPresenter {
 
+    companion object {
+        // TODO check what's happen when obfuscate it
+        val TAG: String = MainPresenter::class.java.simpleName
+    }
+
+    private val compositeDisposable: CompositeDisposable?
+
     init {
-        // TODO uncomment when the subscription in cardManager is working
-        //   cardManager.subscribe()
-    }
+        compositeDisposable = CompositeDisposable()
 
-    private val compositeDisposable = CompositeDisposable()
-
-    override fun getValue(tag: Tag): Boolean {
-        return settingManager.getValue(tag)
-    }
-
-    override fun subscribe(events: Observable<MainEvent>) {
         events.doOnSubscribe { compositeDisposable.add(it) }
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .filter { it is MainEvent.MenuEvent || it is MainEvent.DrinkClick || it is MainEvent.HardcoreClick }
-                .flatMap<MainModel> { this.handleEvent(it) }
+                .observeOn(Schedulers.io())
+                .flatMap<MainModel> { this.handleEvents(it) }
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view.render(it) }
     }
 
-    private fun handleEvent(event: MainEvent): Observable<MainModel> {
+    override fun getValue(tag: Tag): Boolean {
+        // TODO not a stream
+        return settingManager.getValue(tag)
+    }
+
+    private fun handleEvents(event: MainEvent): Observable<MainModel> {
         if (event is MainEvent.DrinkClick) {
             return drinkEvent(event)
         }
@@ -48,27 +54,27 @@ class MainPresenter
 
     private fun drinkEvent(event: MainEvent.DrinkClick): Observable<MainModel> {
         return Observable.just(iconHelper.drinkClick(event))
-                .map { MainModel.DrinkClick(event.item, it) as MainModel }
+                .map { MainModel.DrinkClick() as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })
     }
 
     private fun hardcoreEvent(event: MainEvent.HardcoreClick): Observable<MainModel> {
         return Observable.just(iconHelper.hardcoreClick(event))
-                .map { MainModel.HardcoreClick(event.item, it) as MainModel }
+                .map { MainModel.HardcoreClick() as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })
     }
 
     private fun menuEvent(event: MainEvent.MenuEvent): Observable<MainModel> {
-        return Observable.just(iconHelper.setIconColor(event))
-                .map { MainModel.Menu(event.menuItem, it) as MainModel }
+        return Observable.just(iconHelper.setIconDrawable(event))
+                .map { MainModel.MenuDone() as MainModel }
                 .onErrorReturn({ MainModel.Error(it) })
     }
 
     override fun clear() {
-        compositeDisposable.clear()
+        compositeDisposable!!.clear()
     }
 
     override fun dispose() {
-        compositeDisposable.dispose()
+        compositeDisposable!!.dispose()
     }
 }
