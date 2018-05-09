@@ -39,11 +39,11 @@ class MainActivity : AppCompatActivity(),
     var presenter: MainContract.ActivityPresenter? = null @Inject set
     var events: Subject<MainEvent>? = null @Inject set
     var cardFragment: CardFragment? = null @Inject set
-
     var sensorManager: SensorManager? = null @Inject set
     var accelerometer: Sensor? = null @Inject set
-    private var drawerToggle: ActionBarDrawerToggle? = null
     var injector: DispatchingAndroidInjector<Fragment>? = null @Inject set
+
+    private var drawerToggle: ActionBarDrawerToggle? = null
 
     companion object {
         fun start(context: Context) {

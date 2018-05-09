@@ -17,12 +17,12 @@ import javax.inject.Inject
 class CardPresenter
 @Inject constructor(private val view: MainContract.CardFragment,
                     events: Observable<MainEvent>,
-                    private val settingManager: SettingManager,
-                    private val cardManager: CardManager) : MainContract.CardFragmentPresenter {
+                    settingManager: SettingManager,
+                    cardManager: CardManager) : MainContract.CardFragmentPresenter {
 
     companion object {
         // TODO check what's happen when obfuscate it
-        val TAG: String = CardPresenter::class.java.simpleName
+        private val TAG: String = CardPresenter::class.java.simpleName
     }
 
     private val compositeDisposable: CompositeDisposable?

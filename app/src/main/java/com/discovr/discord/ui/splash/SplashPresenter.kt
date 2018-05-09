@@ -21,7 +21,7 @@ class SplashPresenter
 
     companion object {
         // TODO check what's happen when obfuscate it
-        val TAG: String = SplashPresenter::class.java.simpleName
+        private val TAG: String = SplashPresenter::class.java.simpleName
     }
 
     private val compositeDisposable: CompositeDisposable?

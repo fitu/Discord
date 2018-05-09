@@ -61,10 +61,8 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
-    android {
-        lintOptions {
-            disable 'CheckResult'
-        }
+    lintOptions {
+        disable 'CheckResult'
     }
 
     dexOptions {
@@ -133,7 +131,7 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     })
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.40"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.41"
     implementation "org.jetbrains.anko:anko-common:0.10.0"
 
     implementation 'com.jakewharton.timber:timber:4.6.1'

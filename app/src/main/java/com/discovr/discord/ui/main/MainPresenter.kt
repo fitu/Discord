@@ -20,7 +20,7 @@ class MainPresenter
 
     companion object {
         // TODO check what's happen when obfuscate it
-        val TAG: String = MainPresenter::class.java.simpleName
+        private val TAG: String = MainPresenter::class.java.simpleName
     }
 
     private val compositeDisposable: CompositeDisposable?
