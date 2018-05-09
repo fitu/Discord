@@ -12,8 +12,7 @@ import com.discovr.discord.ui.main.MainEvent
 import javax.inject.Inject
 
 class IconHelper
-@Inject constructor(private val context: Context,
-                    private val settingManager: SettingManager) {
+@Inject constructor(private val context: Context) {
 
     fun setIconDrawable(event: MainEvent.MenuEvent) {
         event.menuItems.forEach {
@@ -46,9 +45,6 @@ class IconHelper
     }
 
     private fun changeIcon(item: MenuItem, isSet: Boolean, colorId: Int, tag: Tag) : Drawable {
-        // TODO remove setting manager from here
-        settingManager.setValue(tag, !isSet)
-
         val newIcon = item.icon
         val newColor = if (isSet) android.R.color.black else colorId
 

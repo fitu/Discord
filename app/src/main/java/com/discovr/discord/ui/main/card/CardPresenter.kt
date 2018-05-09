@@ -1,118 +1,79 @@
 package com.discovr.discord.ui.main.card
 
+import com.discovr.discord.data.manager.card.CardManager
+import com.discovr.discord.data.manager.card.CardResult
+import com.discovr.discord.data.manager.setting.SettingManager
+import com.discovr.discord.data.manager.setting.SettingResult
 import com.discovr.discord.ui.main.MainContract
 import com.discovr.discord.ui.main.MainEvent
 import com.discovr.discord.ui.main.MainModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 // TODO create BasePresenter to inherit common methods
 class CardPresenter
-@Inject constructor(private val view: MainContract.CardFragment) : MainContract.CardFragmentPresenter {
+@Inject constructor(private val view: MainContract.CardFragment,
+                    events: Observable<MainEvent>,
+                    private val settingManager: SettingManager,
+                    private val cardManager: CardManager) : MainContract.CardFragmentPresenter {
 
-    private val compositeDisposable = CompositeDisposable()
-
-    /*
-    events.doOnSubscribe(compositeDisposable::add)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::events);
-
-
-     private void events(MainEvent event) {
-        if (event instanceof MainEvent.SwipeLeft) {
-            swipe();
-            return;
-        }
-
-        if (event instanceof MainEvent.SwipeRight) {
-            swipe();
-            return;
-        }
-
-        if (event instanceof MainEvent.DrinkClick) {
-            reloadCards();
-            return;
-        }
-
-        if (event instanceof MainEvent.HardcoreClick) {
-            reloadCards();
-            return;
-        }
-
-        throw new IllegalArgumentException("Don't know how to render model" + model);
+    companion object {
+        // TODO check what's happen when obfuscate it
+        val TAG: String = CardPresenter::class.java.simpleName
     }
 
-     private void swipe() {
-        currentCount++;
-        if (cardsSize - currentCount < 3) {
-            reloadCards();
-        }
-    }
+    private val compositeDisposable: CompositeDisposable?
 
-   private void reloadCards(List<Card> cards) {
-        swipePlaceHolder.removeAllViews();
-        currentCount = 0;
-        getCards();
-    }
+    init {
+        compositeDisposable = CompositeDisposable()
 
-    private void getCards() {
-        cardManager.getCards()
-                .doOnSubscribe(compositeDisposable::add)
-                .subscribeOn(Schedulers.io())
+        events.doOnSubscribe { compositeDisposable.add(it) }
+                .observeOn(Schedulers.io())
+                .flatMap<MainModel> { this.handleEvents(it) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::addCardsToView, Timber::e);
+                .subscribe { view.render(it) }
+
+        settingManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
+                .observeOn(Schedulers.io())
+                .filter { it.id != TAG }
+                .filter { false }
+                .flatMap<MainModel> { this.handlePrefResults(it) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view.render(it) }
+
+        cardManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
+                .observeOn(Schedulers.io())
+                .filter { it.id != TAG }
+                .filter { false }
+                .flatMap<MainModel> { this.handleCardResults(it) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view.render(it) }
     }
 
-    private void addCardsToView(List<Card> cards) {
-        cardsSize = cards.size();
-        for (Card card : cards) {
-            swipePlaceHolder.addView(new CardSwipeView(card, events));
-        }
-    }
-
-     */
-
-
-    override fun subscribe(events: Observable<MainEvent>) {
-        events.doOnSubscribe({ compositeDisposable.add(it) })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .filter({ it is MainEvent.FragmentStart || it is MainEvent.DrinkClick ||
-                        it is MainEvent.HardcoreClick })
-                .flatMap<MainModel>({ this.handleEvent(it) })
-                .subscribe({ view.render(it) })
-    }
-
-    private fun handleEvent(event: MainEvent): Observable<MainModel> {
-        if (event is MainEvent.FragmentStart) {
-            return startEvent(event)
-        }
-
-        if (event is MainEvent.DrinkClick) {
-            return drinkEvent(event)
-        }
-
-        return hardcoreEvent(event as MainEvent.HardcoreClick)
+    private fun handleEvents(event: MainEvent): Observable<MainModel> {
+        return startEvent(event as MainEvent.FragmentStart)
     }
 
     private fun startEvent(event: MainEvent.FragmentStart) : Observable<MainModel> {
         return Observable.empty()
     }
 
-    private fun drinkEvent(event: MainEvent.DrinkClick): Observable<MainModel> {
+    private fun handlePrefResults(result: SettingResult): Observable<MainModel> {
         return Observable.empty()
     }
 
-    private fun hardcoreEvent(event: MainEvent.HardcoreClick): Observable<MainModel> {
+    private fun handleCardResults(result: CardResult): Observable<MainModel> {
         return Observable.empty()
     }
 
     override fun clear() {
-        compositeDisposable.clear()
+        compositeDisposable!!.clear()
     }
 
     override fun dispose() {
-        compositeDisposable.dispose()
+        compositeDisposable!!.dispose()
     }
 }

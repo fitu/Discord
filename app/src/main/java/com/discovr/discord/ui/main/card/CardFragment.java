@@ -32,7 +32,7 @@ import io.reactivex.subjects.Subject;
 import timber.log.Timber;
 
 // TODO create BaseFragment to inherit common methods
-// This class has to be Java because swipePlaceHolder is not compatible
+// This class has to be Java because swipePlaceHolder is not kotlin compatible
 public class CardFragment extends Fragment implements MainContract.CardFragment {
     @Inject
     Subject<MainEvent> events;
@@ -41,8 +41,6 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     @Inject
     MainContract.CardFragmentPresenter presenter;
     private Unbinder unbinder;
-    private int currentCount = 0;
-    private int cardsSize = 0;
 
     @BindView(R.id.swipePlaceHolder)
     SwipePlaceHolderView swipePlaceHolder;
@@ -73,7 +71,6 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.subscribe(events);
         events.onNext(new MainEvent.FragmentStart());
     }
 
@@ -91,6 +88,40 @@ public class CardFragment extends Fragment implements MainContract.CardFragment 
 
         throw new IllegalArgumentException("Don't know how to render model " + model);
     }
+
+
+    private int currentCount = 0;
+    private int cardsSize = 0;
+    /*
+
+    private fun swipe() {
+        currentCount++
+        if (cardsSize - currentCount < 3) {
+            reloadCards()
+        }
+    }
+
+    private fun reloadCards(List<Card> cards) {
+        swipePlaceHolder.removeAllViews()
+        currentCount = 0
+        getCards()
+    }
+
+    private fun getCards() {
+        cardManager.getCards()
+                .doOnSubscribe(compositeDisposable::add)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::addCardsToView, Timber::e)
+    }
+
+    private fun addCardsToView(List<Card> cards) {
+        cardsSize = cards.size()
+        for (Card card : cards) {
+            swipePlaceHolder.addView(new CardSwipeView(card, events))
+        }
+    }
+     */
 
     private void reloadCards(List<Card> cards) {
         swipePlaceHolder.removeAllViews();

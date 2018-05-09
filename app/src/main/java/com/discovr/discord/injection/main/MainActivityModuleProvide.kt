@@ -26,10 +26,9 @@ class MainActivityModuleProvide {
     @ActivityScope
     internal fun provideActivityPresenter(activity: MainContract.Activity,
                                           events: Observable<MainEvent>,
-                                          cardManager: CardManager,
                                           settingManager: SettingManager,
                                           iconHelper: IconHelper): MainContract.ActivityPresenter {
-        return MainPresenter(activity, events, cardManager, settingManager, iconHelper)
+        return MainPresenter(activity, events, settingManager, iconHelper)
     }
 
     @Provides
@@ -40,8 +39,8 @@ class MainActivityModuleProvide {
 
     @Provides
     @ActivityScope
-    internal fun provideIconHelper(context: Context, settingManager: SettingManager): IconHelper {
-        return IconHelper(context, settingManager)
+    internal fun provideIconHelper(context: Context): IconHelper {
+        return IconHelper(context)
     }
 
     @Provides

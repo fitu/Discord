@@ -38,7 +38,7 @@ class SplashPresenter
         settingManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
                 .filter { it.id != TAG }
-                .filter { it is SettingResult.FirstTime }
+                .filter { false }
                 .flatMap<SplashModel> { this.handleSettingResults(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view.render(it) }
@@ -46,7 +46,7 @@ class SplashPresenter
         cardManager.resultsObs.doOnSubscribe { compositeDisposable.add(it) }
                 .observeOn(Schedulers.io())
                 .filter { it.id != TAG }
-                .filter { it is CardResult.LoadCardsDone || it is CardResult.LoadCardsFail }
+                .filter { false }
                 .flatMap<SplashModel> { this.handleCardResults(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view.render(it) }

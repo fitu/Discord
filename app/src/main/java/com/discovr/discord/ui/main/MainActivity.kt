@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onSensorChanged(sensorEvent: SensorEvent) {}
 
-    override fun onAccuracyChanged(sensor: Sensor, i: Int) {}
+    override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
     override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment>? {
         return injector

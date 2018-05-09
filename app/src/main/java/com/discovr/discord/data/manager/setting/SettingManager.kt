@@ -22,25 +22,32 @@ constructor(private val results: Subject<SettingResult>,
         get() = sharedPreferences.getBoolean(KEY_FIRST_TIME, true)
 
     fun handleAction(action: SettingAction): Observable<SettingResult> {
-        return actionFirstTime(action as SettingAction.FirstTime)
+        if (action is SettingAction.FirstTime) {
+            return actionFirstTime(action)
+        }
+
+        return actionPrefChange(action as SettingAction.PrefChange)
     }
 
     private fun actionFirstTime(action: SettingAction.FirstTime): Observable<SettingResult> {
-        sharedPreferences.edit()
-                .putBoolean(KEY_FIRST_TIME, !isFirstTime)
-                .apply()
-
+        setValue(KEY_FIRST_TIME, !isFirstTime)
         results.onNext(SettingResult.FirstTime(action.id))
         return Observable.just(SettingResult.FirstTime(action.id))
+    }
+
+    private fun actionPrefChange(action: SettingAction.PrefChange): Observable<SettingResult> {
+        setValue(action.tag, !action.currentValue)
+        results.onNext(SettingResult.PrefChange(action.id, action.tag, !action.currentValue))
+        return Observable.just(SettingResult.PrefChange(action.id, action.tag, !action.currentValue))
     }
 
     fun getValue(tag: Tag): Boolean {
         return sharedPreferences.getBoolean(tag.name, false)
     }
 
-    fun setValue(tag: Tag, value: Boolean) {
+    private fun setValue(tag: String, value: Boolean) {
         sharedPreferences.edit()
-                .putBoolean(tag.name, value)
+                .putBoolean(tag, value)
                 .apply()
     }
 }
